@@ -15,6 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Auth::routes();
 
+
+
 Route::get('/home', 'HomeController@index');
+Route::post('/postRegister/{role}', 'HomeController@postRegister');
+
+Route::get('/corporation/dashboard','CorporationController@index');
+Route::get('/personal/dashboard','PersonalController@index');
+
