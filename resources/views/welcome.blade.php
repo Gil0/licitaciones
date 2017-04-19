@@ -76,7 +76,7 @@
     }
     .parallax { 
         height: 300px;
-        background-image: url(Imagenes/licitacion.jpg);
+        background-image: url(Imagenes/unete.png);
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -103,6 +103,26 @@
         font-family: 'Oswald', sans-serif;
         text-align: center;
     }
+    .unete{
+        color: #fff;
+        font-family: 'Oswald', sans-serif;
+        text-align: center;
+        padding-top: 8%;
+    }
+    .equipo{
+        padding-top: 30px;
+        width:300px;
+        height: 300px;
+    }
+    .parrafoequipo{
+        color: #fff;
+        position: relative;
+        font-family: 'Oswald',sans-serif;
+        text-align: center;
+        top: -150px;
+        font-size: 25px;
+        text-decoration: underline;
+    }
 </style>
 <div class="">
     <div class="col-sm-12 banner">
@@ -116,9 +136,24 @@
         </br>
         <div class="col-md-10 col-md-offset-1 parrafoacerca">
             <p class="parrafoacercade"><span class="log">Licitop</span> es un sistema para la publicación de proyectos de carácter privado, en busca de modo de concurso en donde las dependencias registradas competirán por quedarse con este proyecto y poder llevarlo a cabo, siendo el ganador la dependencia que más le convenga a la empresa que solicita.</p>
+            <div class="col-md-4">
+                <img class="equipo" src="Imagenes/equipo1.png">
+                <p class="parrafoequipo">Gestion Eficiente</p>
+            </div>
+            <div class="col-md-4">
+                <img class="equipo" src="Imagenes/equipo2.png">
+                <p class="parrafoequipo">Publica Proyectos</p>
+            </div>
+            <div class="col-md-4">
+                <img class="equipo" src="Imagenes/equipo3.png">
+                <p class="parrafoequipo">Gana Licitaciones</p>
+            </div>
         </div>
+       
     </div>
-    <div class="cantainer col-md-12 parallax"></div>
+    <div class="cantainer col-md-12 parallax">
+        <h1 class="unete">Unete a este gran proyecto!</h1>
+    </div>
     <div class="col-md-12">
         <div class="col-md-10 conten col-md-offset-1">
             <div class="col-md-6">
