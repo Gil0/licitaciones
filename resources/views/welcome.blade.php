@@ -10,7 +10,11 @@
     }
     .banner{
         background: #124151;
+<<<<<<< HEAD
         height: 450px;
+=======
+        height: 400px;
+>>>>>>> ff77f55208a6da3152ca74fb7e5059e2e0afc577
         position: relative;
         top: -100px;
     }
@@ -19,12 +23,20 @@
         font-family: 'Anton', sans-serif;
         text-align: center;
         position: relative;
+<<<<<<< HEAD
         top: -340px;
+=======
+        top: -350px;
+>>>>>>> ff77f55208a6da3152ca74fb7e5059e2e0afc577
         letter-spacing: 4px;
         font-size: 60px;
     }
     .imgbanner{
+<<<<<<< HEAD
         height: 450px;
+=======
+        height: 400px;
+>>>>>>> ff77f55208a6da3152ca74fb7e5059e2e0afc577
         width: 100%;
     }
     .letteracerca{
@@ -34,7 +46,11 @@
     }
     .acerca{
         position: relative;
+<<<<<<< HEAD
         top: -50px;
+=======
+        top: -100px;
+>>>>>>> ff77f55208a6da3152ca74fb7e5059e2e0afc577
     }
     .log{
         color: #3F3F3F;
@@ -68,7 +84,11 @@
     }
     .iconbanner{
         position: relative;
+<<<<<<< HEAD
         top: -340px;
+=======
+        top: -320px;
+>>>>>>> ff77f55208a6da3152ca74fb7e5059e2e0afc577
     }
     hr{
         display: block;
@@ -84,6 +104,10 @@
     }
     .conten{
         padding-top: 30px;
+<<<<<<< HEAD
+=======
+        pa
+>>>>>>> ff77f55208a6da3152ca74fb7e5059e2e0afc577
     }
     .mv{
         width: 400px;
@@ -97,11 +121,18 @@
     }
     footer{
         background: #124151;
+<<<<<<< HEAD
         height: 40px;
         color: #fff;
         font-family: 'Oswald', sans-serif;
         text-align: center;
         padding-top: 10px;
+=======
+        height: 30px;
+        color: #fff;
+        font-family: 'Oswald', sans-serif;
+        text-align: center;
+>>>>>>> ff77f55208a6da3152ca74fb7e5059e2e0afc577
     }
     .unete{
         color: #fff;
@@ -110,7 +141,11 @@
         padding-top: 8%;
     }
     .equipo{
+<<<<<<< HEAD
         padding-top: 20px;
+=======
+        padding-top: 30px;
+>>>>>>> ff77f55208a6da3152ca74fb7e5059e2e0afc577
         width:300px;
         height: 300px;
     }
@@ -123,6 +158,7 @@
         font-size: 25px;
         text-decoration: underline;
     }
+<<<<<<< HEAD
     .footer1{
         height: 130px;
         background: #0a2934;
@@ -131,6 +167,8 @@
         width: 7%;
         padding-top: 5px;
     }
+=======
+>>>>>>> ff77f55208a6da3152ca74fb7e5059e2e0afc577
 </style>
 <div class="">
     <div class="col-sm-12 banner">
@@ -155,6 +193,35 @@
             <div class="col-md-4">
                 <img class="equipo" src="Imagenes/equipo3.png">
                 <p class="parrafoequipo">Gana Licitaciones</p>
+<<<<<<< HEAD
+=======
+            </div>
+        </div>
+       
+    </div>
+    <div class="cantainer col-md-12 parallax">
+        <h1 class="unete">Unete a este gran proyecto!</h1>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-10 conten col-md-offset-1">
+            <div class="col-md-6">
+                <center><img class="mv" src="Imagenes/mision.jpg"></center>
+            </div>
+            <div class="col-md-6">
+                <h1 class="letteracerca">Misión</h1>
+                <p class="parrafo">LiciTop es una plataforma de software dedicada a gestionar eficientemente convocatorias de todo tipo de proyectos ya sea de carácter público, así como privado.</p>
+                <p class="parrafo">Cuenta con una interfaz intuitiva que le permite al usuario publicar proyectos, así como también registrarse para poder ganar la licitación de otros.</p>
+            </div>
+        </div>
+        <div class="div col-md-12"></div>
+        <div class="col-md-10 conten col-md-offset-1">
+            <div class="col-md-6">
+                <h1 class="letteracerca">Visión</h1>
+                <p class="parrafo">Nuestra plataforma pretende ayudar a los usuarios a generar mercado, así como también emplearse en diversas áreas </p>
+            </div>
+            <div class="col-md-6">
+                <center><img class="mv" src="Imagenes/vision.jpg"></center>
+>>>>>>> ff77f55208a6da3152ca74fb7e5059e2e0afc577
             </div>
         </div>
        
