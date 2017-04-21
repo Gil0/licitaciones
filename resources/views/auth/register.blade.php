@@ -1,11 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    .loginletter{
+        color: #B7B7B7;
+        font-family: 'Oswald', sans-serif;
+        top: 25px;
+    }
+</style>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
+                <div class="loginletter panel-heading">Registrarse</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {{ csrf_field() }}

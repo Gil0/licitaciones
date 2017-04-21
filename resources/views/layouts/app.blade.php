@@ -19,6 +19,52 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Anton');
+        @import url('https://fonts.googleapis.com/css?family=Oswald');
+        body {
+            font-family: 'Lato';
+            padding: 0;
+            margin: 0;
+        }
+
+        .fa-btn {
+            margin-right: 6px;
+        }
+        .navbarl{
+            background: #fff;
+            height: 100px;
+        }
+        .logo{
+            position: relative;
+            width: 20%;
+            padding-top: 10px;
+        }
+        .letter{
+            color: #39A8EA;
+            font-family: 'Anton', sans-serif;
+            font-size: 40px;
+            position: relative;
+            top: -75px;
+            left: 25%;
+        }
+        .pa{
+            color: #B7B7B7;
+            font-family: 'Oswald', sans-serif;
+            font-size: 18px;
+            position: relative;
+            top: -95px;
+            left: 30%;
+        }
+        .loginletter{
+            color: #B7B7B7;
+            font-family: 'Oswald', sans-serif;
+            top: 25px;
+        }
+        .navv{
+            height: 120px;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -35,9 +81,11 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
+                    <div class="navv">
+                        <img class="logo" src="../Imagenes/Logo.png">
+                        <p class="letter">LiciTop</p>
+                        <p class="pa">Licitaciones privadas</p>
+                    </div>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -47,11 +95,11 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav nav-pills navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ url('/login') }}">Login</a></li>
-                            <li><a href="{{ url('/register') }}">Register</a></li>
+                            <li><a class="loginletter" href="{{ url('/login') }}">Login</a></li>
+                            <li><a class="loginletter" href="{{ url('/register') }}">Regitrarse</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
