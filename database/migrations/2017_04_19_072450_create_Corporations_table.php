@@ -17,9 +17,13 @@ class CreateCorporationsTable extends Migration
             $table->increments('id');
             $table->string('location')->nullable();
             $table->enum('rate',['1','2','3','4','5'])->nullable();
+            $table->string('address');
+            $table->string('phoneNumber');
+            $table->integer('zipCode');    
+            $table->string('rfc');
+            $table->string('workArea');
             $table->timestamps();
             $table->rememberToken();
-
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
         });
