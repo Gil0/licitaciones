@@ -96,10 +96,14 @@ class HomeController extends Controller
             {
                 $Personal = new Personal;
                 $Personal->area = $request->area;
+                $Personal->phoneNumber = $request->phoneNumber;
+                $Personal->address = $request->address;
+                $Personal->rfc = $request->rfc;
+                $Personal->zipCode = $request->zipCode;
                 $User->Personal()->save($Personal);
             }
 
-            $redirect = "personal/dashboard";
+            $redirect = "/personal/dashboard";
         }
 
         return redirect($redirect);
