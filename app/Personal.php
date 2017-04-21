@@ -13,7 +13,7 @@ class Personal extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'area',
+        'name', 'email', 'area','phoneNumber','address','rfc','zipCode'
     ];
 
     /**
