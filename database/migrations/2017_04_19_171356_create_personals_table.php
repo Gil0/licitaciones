@@ -17,7 +17,10 @@ class CreatePersonalsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('area');
-
+            $table->string('phoneNumber');
+            $table->string('address');
+            $table->string('rfc');
+            $table->integer('zipCode');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
         });
