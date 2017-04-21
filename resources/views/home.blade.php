@@ -20,6 +20,11 @@
                             <label>location</label>
 
                             Area: <input name="area" class="form-control">
+                            Phone Number: <input name="phoneNumber" class="form-control">
+                            Address: <input name="address" class="form-control">
+                            ZipCode: <input name="zipCode" class="form-control">
+                            RFC: <input name="rfc" class="form-control">   
+                            
                                                     
                             <div class="panel-default">
                                 Al terminar el registro de la informacion necesaria la primera vez que inica sesion el usuario podra modificar dicha informacion en su configuracion de cuenta.
