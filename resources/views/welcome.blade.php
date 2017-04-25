@@ -12,14 +12,14 @@
         background: #124151;
         height: 400px;
         position: relative;
-        top: -100px;
+        top: 0px;
     }
     .letterbanner{
         color: #fff;
         font-family: 'Anton', sans-serif;
         text-align: center;
         position: relative;
-        top: -300px;
+        top: -350px;
         letter-spacing: 4px;
         font-size: 60px;
     }
@@ -34,7 +34,7 @@
     }
     .acerca{
         position: relative;
-        top: -50px;
+        top: 0px;
     }
     .log{
         color: #3F3F3F;
@@ -57,7 +57,7 @@
     .parrafobanner{
         color: #fff;
         position: relative;
-        top: -310px;
+        top: -350px;
         text-align: center;
         font-family: 'Oswald', sans-serif;
         font-size: 20px;
@@ -68,7 +68,7 @@
     }
     .iconbanner{
         position: relative;
-        top: -310px;
+        top: -350px;
     }
     hr{
         display: block;
