@@ -55,4 +55,8 @@ class CorporationController extends Controller
         return view('Corporation.myteam',['personal'=>$personal]);
 
     }
+    public function projects()
+    {
+        return view('.projects');
+    }
 }

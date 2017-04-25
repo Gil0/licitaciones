@@ -29,4 +29,8 @@ class PersonalController extends Controller
 
         return view('Personal.dashboard');
     }
+    public function projects()
+    {
+        return view('.projects');
+    }
 }

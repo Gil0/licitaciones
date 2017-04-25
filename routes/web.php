@@ -19,11 +19,24 @@ Route::get('/', function () {
 Auth::routes();
 
 
-
 Route::get('/home', 'HomeController@index');
 Route::post('/postRegister/{role}', 'HomeController@postRegister');
 
 Route::get('/corporation/dashboard','CorporationController@index');
 Route::get('/personal/dashboard','PersonalController@index');
 
+
 Route::get('/corporation/myteam/{id}','CorporationController@myteam');
+
+
+Route::get('/announcements', 'announcement@getAnnouncements');
+
+/*-----Projects-----*/
+Route::get('/personal/projects','PersonalController@projects');
+Route::get('/corporation/projects','CorporationController@projects');
+
+Route::get('/personal/dashboard/misConvocatorias/{id}','announcement@announcement');
+Route::get('/corporation/dashboard/misConvocatorias/{id}','announcement@announcement');
+ 
+
+
