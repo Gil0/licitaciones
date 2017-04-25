@@ -7,8 +7,11 @@
         font-family: 'Oswald', sans-serif;
         top: 25px;
     }
+    .pad{
+        padding-top: 40px;
+    }
 </style>
-<div class="container">
+<div class="container pad">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
