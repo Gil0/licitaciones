@@ -19,7 +19,7 @@
 		<li><a class="letternav" href="{{url ('/home')}}">Inicio</a></li>
 		<li><a href="#" class="letternav dropdown-toggle" data-toggle="dropdown">Convocatoria<b class="caret"></b></a>
             <ul class="dropdown-menu">
-                <li><a href="{{url(/announcements)}}">General</a></li>
+                <li><a href="{{url('/announcements')}}">General</a></li>
                 <li><a href="#">Mis Convocatorias</a></li>
             </ul>
         </li>

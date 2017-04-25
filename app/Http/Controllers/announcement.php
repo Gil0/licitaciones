@@ -19,8 +19,9 @@ class announcement extends Controller
     }
 
     public function getAnnouncements(){
-        $annoucements = DB::table('annoucements')->get();
-        return view ('annoucements',['annoucements' => $annoucements]);
+        $announcements = DB::table('announcements')->get();
+        //dd($annoucements);
+        return view ('announcements',['announcements' => $announcements]);
     }
     /**
      * Show the form for creating a new resource.
