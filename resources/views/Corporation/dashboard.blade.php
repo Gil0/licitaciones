@@ -16,14 +16,14 @@
 </style>
 <div class="navar">
 	<ul class="nav nav-pills">
-		<li><a class="letternav" href="#">Inicio</a></li>
+		<li><a class="letternav" href="{{url ('/home')}}">Inicio</a></li>
 		<li><a href="#" class="letternav dropdown-toggle" data-toggle="dropdown">Convocatoria<b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li><a href="{{url(/announcements)}}">General</a></li>
                 <li><a href="#">Mis Convocatorias</a></li>
             </ul>
         </li>
-		<li><a class="letternav" href="#">Proyecto</a></li>
+		<li><a class="letternav" href="{{url ('/personal/projects')}}">Proyecto</a></li>
 		<li><a class="letternav" href="#">Mi equipo</a></li>
 	</ul>
 </div>

@@ -29,4 +29,8 @@ class CorporationController extends Controller
 
         return view('Corporation.dashboard');
     }
+    public function projects()
+    {
+        return view('.projects');
+    }
 }
