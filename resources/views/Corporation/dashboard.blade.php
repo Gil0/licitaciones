@@ -23,7 +23,7 @@
 		<li><a href="#" class="letternav dropdown-toggle" data-toggle="dropdown">Convocatoria<b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li><a href="{{url('/announcements')}}">General</a></li>
-				<li class ="MisConvocatorias"><a href="">Mis convocatorias</a></li>
+				<li class ="MisConvocatorias" value="{{Auth::user()->id}}"><a >Mis convocatorias</a></li>
             </ul>
         </li>
 		<li><a class="letternav" href="{{url ('/personal/projects')}}">Proyecto</a></li>
@@ -34,7 +34,8 @@
 <script>
   $(document).ready(function(){
 	  $('li.MisConvocatorias').click(function(){
-		 windows.location.href = "/corporation/dashboard/misConvocatorias/ " +$(this).attr('value');
+		 window.location.href = '/corporation/dashboard/misConvocatorias/' +$(this).attr('value');
+		 
 	  });
 
   });

@@ -17,8 +17,7 @@ class announcement extends Controller
      */
     public function index()
     {
-        $announcements= BD::table('announcements')->select('*')->get();
-         return view('/Corporation/convocatoria',['announcements'=>$announcements]);
+       
     }
 
     public function getAnnouncements(){
@@ -100,10 +99,9 @@ class announcement extends Controller
         $this->middleware('auth');
     }
 
- public function annuncement(Request $request , $id ){
-         $annuncements =  DB::table('annuncements')->select('*')->get();
-         return view('/Corporation/convocatoria',['annuncements'=>$annuncements]);
-
+ public function announcement(Request $request , $id ){
+         $announcements =  DB::table('announcements')->where('id',$id)->get();
+         return view('/Corporation/convocatoria',['announcements'=>$announcements]);
      }
 
         public function crearConvocatoria(Request $request, $id){
@@ -121,7 +119,7 @@ class announcement extends Controller
      }
      
  
-
+ 
      
 
 }

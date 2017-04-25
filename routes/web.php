@@ -18,10 +18,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/prueba', function(){
-    return view('/Corporation/convocatoria');
-});
-
 
 Route::get('/home', 'HomeController@index');
 Route::post('/postRegister/{role}', 'HomeController@postRegister');
@@ -37,6 +33,6 @@ Route::get('/personal/projects','PersonalController@projects');
 Route::get('/corporation/projects','CorporationController@projects');
 
 Route::get('/personal/dashboard/misConvocatorias/{id}','announcement@announcement');
-Route::get('/corporation/dashboard/misConvocatorias/','announcement@index');
-
+Route::get('/corporation/dashboard/misConvocatorias/{id}','announcement@announcement');
+ 
 

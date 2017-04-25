@@ -45,23 +45,18 @@
                                 <th class="head">Id</th>
                                 <th class="head">Nombre</th>
                                 <th class="head">Categoria</th>
-                                <th class="head">Duración</th>
-                                <th class="head">Presupuesto</th>
-                                <th class="head text-center">Descripción</th>
+                                <th class="head"></th>
                             </tr>
                         </thread>
                         <tbody>
-                            
-                                    <th class="text-center">
-                                        <!-- Single button -->
-                                        <div class="btn-group">
-                                        <button type="button" class="btn statusBtn" style="width:200%;" id="" value="">
-                                           <i class="fa fa-bullseye" aria-hidden="true"></i>
-                                        </button>
-                                        </div>
-                                    </th>
+                            @foreach($announcements as $announcements)
+                               <tr class="rowsTabla">
+                                    <th scope="row">{{$announcements->id}}</th>
+                                    <th >{{$announcements->name}}</th>
+                                    <th >{{$announcements->category}}</th>
+                                    <th class="text-right"><i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$announcements->id}}"></i></th>
                                 </tr>
-                      
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
