@@ -17,10 +17,17 @@
 <div class="navar">
 	<ul class="nav nav-pills">
 		<li><a class="letternav" href="#">Inicio</a></li>
-		<li><a class="letternav" href="#">Convocatoria</a></li>
+		<li><a href="#" class="letternav dropdown-toggle" data-toggle="dropdown">Convocatoria<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="{{url(/announcements)}}">General</a></li>
+                <li><a href="#">Mis Convocatorias</a></li>
+            </ul>
+        </li>
 		<li><a class="letternav" href="#">Proyecto</a></li>
+		<li><a class="letternav" href="#">Mi equipo</a></li>
 	</ul>
 </div>
+
 
 <div class="container">
   <div class="row">
@@ -32,22 +39,21 @@
             <tr>
               <th class="head"><h5>Id</h5></th>
               <th class="head"><h5>Nombre</h5></th>
-              <th class="head"><h5>Area</h5></th>
+              <th class="head"><h5>Categoria</h5></th>
               <th class="head"></th> 
             </tr>
           </thread>
           <tbody>
-         <!--   @foreach($convocatoria as $convocatoria)
+          @foreach($announcements as $announcement)
             <tr class="rowsTabla">
-              <th scope="row">{{$convocatoria->id}}</th>
-              <th >{{$convocatoria->nombre}}</th>
-              <th >{{$convocatoria->area}}</th>
-              <th class="text-right"><i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$convocatoria->id}}" onclick="redirect({{$convocatoria->id}})"></i></th>
+              <th scope="row">{{$announcement->id}}</th>
+              <th >{{$announcement->name}}</th>
+              <th >{{$announcement->category}}</th>
+              <th class="text-right"><i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$announcement->id}}"></i></th>
             </tr>
-            @endforeach-->
+            @endforeach
           </tbody>
         </table>
-        <!--{!! $eventos -> render() !!}-->
       </div>
     </div>
   </div>
