@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CorporationController extends Controller
 {
@@ -26,7 +27,32 @@ class CorporationController extends Controller
      */
     public function index()
     {
+        return view('Corporation.dashboard');        
+    }
 
-        return view('Corporation.dashboard');
+    public function myteam(Request $request, $id)
+    {
+          $personal = DB::table('users')
+            ->join('personals', 'users.id', '=', 'personals.user_id')
+            ->select('users.name','users.email','personals.area','personals.phoneNumber',
+            'personals.address','personals.rfc','personals.zipCode','personals.idCorporation')
+            ->where('idCorporation',$id)
+            ->get();  
+
+        return view('Corporation.myteam',['personal'=>$personal]);
+
+    }
+
+    public function newteam()
+    {
+          $personal = DB::table('users')
+            ->join('personals', 'users.id', '=', 'personals.user_id')
+            ->select('users.name','users.email','personals.area','personals.phoneNumber',
+            'personals.address','personals.rfc','personals.zipCode','personals.idCorporation')
+            ->where('idCorporation',NULL)
+            ->get();  
+
+        return view('Corporation.myteam',['personal'=>$personal]);
+
     }
 }

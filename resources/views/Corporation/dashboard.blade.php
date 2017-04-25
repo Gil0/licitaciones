@@ -16,10 +16,10 @@
 </style>
 <div class="navar">
 	<ul class="nav nav-pills">
-		<li><a class="letternav" href="#">Inicio</a></li>
+		<li><a class="letternav" href="{{url('corporation/dashboard')}}">Inicio</a></li>
 		<li><a class="letternav" href="#">Convocatoria</a></li>
 		<li><a class="letternav" href="#">Proyecto</a></li>
-		<li><a class="letternav" href="#">Mi equipo</a></li>
+		<li><a class="letternav" href="{{url ('/corporation/myteam/{Auth::user()->id}')}}">Mi equipo</a></li>
 	</ul>
 </div>
 @endsection
