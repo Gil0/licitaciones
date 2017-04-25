@@ -44,7 +44,6 @@
             </tr>
           </thread>
           <tbody>
-           
           @foreach($announcements as $announcements)
             <tr class="rowsTabla">
               <th scope="row">{{$announcements->id}}</th>
