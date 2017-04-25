@@ -25,6 +25,11 @@ class announcement extends Controller
         //dd($annoucements);
         return view ('announcements',['announcements' => $announcements]);
     }
+    /*------Projects-----*/
+    public function getProjects(Request $request,$id){
+        $projects =  DB::table('projects')->where('id',$id)->get();
+         return view('projects',['projects'=>$projects]);
+    }
     /**
      * Show the form for creating a new resource.
      *

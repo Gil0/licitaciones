@@ -93,7 +93,7 @@
 				<li class ="MisConvocatorias" value="{{Auth::user()->id}}"><a >Mis convocatorias</a></li>
             </ul>
         </li>
-		<li><a class="letternav" href="{{url ('/corporation/projects')}}">Proyecto</a></li>
+		<li class="MisProyectos" value="{{Auth::user()->id}}"><a class="letternav">Proyecto</a></li>
 		<li><a class="letternav" href="#">Mi equipo</a></li>
 	</ul>
 </div>
@@ -136,6 +136,11 @@
 	  });
 
   });
+  $(document).ready(function(){
+     $('li.MisProyectos').click(function(){
+        window.location.href = '/projects/' +$(this).attr('value');
+     });
+  });     
 </script>
 
 @endsection

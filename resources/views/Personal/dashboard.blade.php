@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
 <style>
 	@import url('https://fonts.googleapis.com/css?family=Anton');
     @import url('https://fonts.googleapis.com/css?family=Oswald');
@@ -90,7 +93,7 @@
                 <li><a href="#">Mis Convocatorias</a></li>
             </ul>
         </li>
-		<li><a class="letternav" href="{{url ('/personal/projects')}}">Proyecto</a></li>
+		<li class="MisProyectos" value="{{Auth::user()->id}}"><a class="letternav">Proyecto</a></li>
 	</ul>
 </div>
 <div>
@@ -123,4 +126,11 @@
         <p>LiciTop - Todos los derechos reservados.</p>
     </footer>
 </div>
+<script>
+  $(document).ready(function(){
+     $('li.MisProyectos').click(function(){
+        window.location.href = '/projects/' +$(this).attr('value');
+     });
+  });     
+</script>
 @endsection
