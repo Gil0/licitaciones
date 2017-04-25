@@ -105,17 +105,17 @@ class announcement extends Controller
      }
 
         public function crearConvocatoria(Request $request, $id){
-         DB::table('annuncements')->insert([
+         DB::table('announcements')->insert([
             'name' => $request->name,
             'category' => $request->category,
             'duration' => $request->duration,
              'budget' => $request->budget,
              'description' => $request->description,
-            'user_id' => $id,
+            'user_id' => $request->user_id,
            
         ]);
      
-       return redirect()->action('UserController@profesores');
+       return redirect()->action('announcement@getAnnouncements');
      }
      
  
