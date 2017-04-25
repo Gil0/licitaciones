@@ -34,4 +34,5 @@ Route::get('/projects/{id}','announcement@getProjects');
 Route::get('/personal/dashboard/misConvocatorias/{id}','announcement@announcement');
 Route::get('/corporation/dashboard/misConvocatorias/{id}','announcement@announcement');
  
+ Route::post('/corporation/dashboard/crear/{id}',  ['middleware' , 'uses' => 'announcement@crearConvocatoria']);
 

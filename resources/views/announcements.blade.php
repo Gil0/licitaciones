@@ -12,8 +12,11 @@
 	}
 	.letternav{
 		color: #fff;
-		font-family: 'Oswald', sans-serif;
+		font-family: 'Oswald', sans-serif; 
 	}
+   .fa-plus-circle{
+    barckground-color: green;
+  }
 </style>
 <div class="navar">
 	<ul class="nav nav-pills">
@@ -41,7 +44,8 @@
               <th class="head"><h5>Id</h5></th>
               <th class="head"><h5>Nombre</h5></th>
               <th class="head"><h5>Categoria</h5></th>
-              <th class="head"></th> 
+              <th class="head"> Ver mas </th> 
+              <th class="head"> Editar </th> 
             </tr>
           </thread>
           <tbody>
@@ -51,6 +55,7 @@
               <th >{{$announcements->name}}</th>
               <th >{{$announcements->category}}</th>
               <th class="text-right"><i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$announcements->id}}"></i></th>
+              <th><i class="fa fa-pencil-square fa-2x iconpencil" aria-hidden="true" value="{{$announcements->id}}"></i></th>
             </tr>
             @endforeach
           </tbody>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <style>
 	@import url('https://fonts.googleapis.com/css?family=Anton');
     @import url('https://fonts.googleapis.com/css?family=Oswald');
@@ -35,7 +35,7 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <button class="btn btn-success" style="width:100%;" data-toggle="modal" data-target="#crearEvento"><h4>Crear Convocatoria</h4></button>
+                    <button class="btn btn-success" style="width:100%;" data-toggle="modal" data-target="#crearConvocatoria"><h4>Crear Convocatoria</h4></button>
                 </div>
                 <div class="panel-body">
                     <h3>Convocatorias</h3>
@@ -98,29 +98,29 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Crear Convocatoria</h4>
       </div>
-      <form action="/admin/eventos/crear" method="POST">
+      <form action="/corporation/dashboard/crear/{id}" method="POST">
       {{ csrf_field() }} <!-- ESTE TOKEN ES IMPORTANTE PARA PODER ENVIAR DATOS AL SERVER... si no lo incluyes habra error ya que la informacion no es "confiable" -->
         <div class="modal-body">
             <input type="text" class="form-control" placeholder="Nombre" name="name" required><br>
         </div>
         <div class="modal-body">
-            <input type="text" class="form-control" placeholder="Nombre" name="category" required><br>
+            <input type="text" class="form-control" placeholder="Categoria" name="category" required><br>
         </div>
         <div class="modal-body">
-            <input type="text" class="form-control" placeholder="Nombre" name="duration" required><br>
+            <input type="text" class="form-control" placeholder="Duracion" name="duration" required><br>
         </div>
         <div class="modal-body">
-            <input type="text" class="form-control" placeholder="Nombre" name="budget" required><br>
+            <input type="text" class="form-control" placeholder="Presupuesto" name="budget" required><br>
         </div>
         <div class="modal-body">
-            <input type="text" class="form-control" placeholder="Nombre" name="description" required><br>
+            <input type="text" class="form-control" placeholder="Descripción" name="description" required><br>
         </div>
         <div class="modal-body">
-            <input type="text" class="form-control" placeholder="Nombre" name="nombre" required><br>
+           <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelar">Cerrar</button>
-            <button type="submit" class="btn btn-primary" id="crearEvento">Guardar</button>
+            <button type="submit" class="btn btn-primary" id="crearConvocatoria">Guardar</button>
         </div>
       </form>
     </div>
