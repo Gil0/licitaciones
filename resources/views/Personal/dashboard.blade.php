@@ -17,7 +17,12 @@
 <div class="navar">
 	<ul class="nav nav-pills">
 		<li><a class="letternav" href="#">Inicio</a></li>
-		<li><a class="letternav" href="#">Convocatoria</a></li>
+		<li><a href="#" class="letternav dropdown-toggle" data-toggle="dropdown">Convocatoria<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="#">General</a></li>
+                <li><a href="#">Mis Convocatorias</a></li>
+            </ul>
+        </li>
 		<li><a class="letternav" href="#">Proyecto</a></li>
 	</ul>
 </div>
