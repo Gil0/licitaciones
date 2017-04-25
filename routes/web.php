@@ -26,3 +26,6 @@ Route::post('/postRegister/{role}', 'HomeController@postRegister');
 Route::get('/corporation/dashboard','CorporationController@index');
 Route::get('/personal/dashboard','PersonalController@index');
 
+/*-----Projects-----*/
+Route::get('/personal/projects','PersonalController@projects');
+Route::get('/corporation/projects','CorporationController@projects');
