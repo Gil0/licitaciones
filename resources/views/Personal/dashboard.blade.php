@@ -96,7 +96,7 @@
 <div>
 	<div class="col-md-12 banner">
 		<img class="imgbanner" src="Imagenes/banner.png">
-        <center><h1 class="letterbanner">{{ Auth::user()->name }} Bienvenido a</h1></center>
+        <center><h1 class="letterbanner">{{ Auth::user()->name }} bienvenido a</h1></center>
         <h1 class="letterbanner">LiciTop</h1>
         <center><img class="iconbanner" src="Imagenes/list.png"></center>
 	</div>
