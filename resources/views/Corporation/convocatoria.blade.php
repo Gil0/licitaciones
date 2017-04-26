@@ -166,7 +166,6 @@
 <script>
     $(document).ready(function(){
         $('i').click(function(){
-            alert('hola');
            window.location.href = '/corporation/dashboard/misConvocatorias/'+$(this).attr('value')+ '/edit';
         });
     });
