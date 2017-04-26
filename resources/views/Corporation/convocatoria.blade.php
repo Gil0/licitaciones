@@ -24,8 +24,13 @@
                 <li class ="MisConvocatorias" value="{{Auth::user()->id}}"><a >Mis convocatorias</a></li>
             </ul>
         </li>
-		<li><a class="letternav" href="#">Proyecto</a></li>
-		<li><a class="letternav" href="#">Mi equipo</a></li>
+		<li><a class="letternav" href="{{url ('/corporation/projects')}}">Proyecto</a></li>
+		<li><a href="#" class="letternav dropdown-toggle" data-toggle="dropdown">Mi Equipo<b class="caret"></b></a>
+            <ul class="dropdown-menu">                				
+                <li><a href="{{url('/corporation/myteam/'.Auth::user()->id)}}">Mi Personal</a></li>
+                <li><a href="{{url('/corporation/newpersonal/'.Auth::user()->id)}}">Nuevo Personal</a></li>
+            </ul>
+        </li>
 	</ul>
 </div>
 
