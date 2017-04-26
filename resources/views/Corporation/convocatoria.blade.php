@@ -45,7 +45,8 @@
                                 <th class="head">Id</th>
                                 <th class="head">Nombre</th>
                                 <th class="head">Categoria</th>
-                                <th class="head"></th>
+                                <th class="head"> Ver mas </th> 
+                                <th class="head"> Editar </th> 
                             </tr>
                         </thread>
                         <tbody>
@@ -55,6 +56,7 @@
                                     <th >{{$announcements->name}}</th>
                                     <th >{{$announcements->category}}</th>
                                     <th class="text-right"><i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$announcements->id}}"></i></th>
+                                    <th><i class="fa fa-pencil-square fa-2x iconpencil" aria-hidden="true" value="{{$announcements->id}}"></i></th>
                                 </tr>
                             @endforeach
                         </tbody>
