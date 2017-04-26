@@ -25,6 +25,10 @@ Route::post('/postRegister/{role}', 'HomeController@postRegister');
 Route::get('/corporation/dashboard','CorporationController@index');
 Route::get('/personal/dashboard','PersonalController@index');
 
+/*----MyTeam-----*/
+Route::get('/corporation/myteam/{id}','CorporationController@myteam');
+Route::get('/corporation/newpersonal/{id}','CorporationController@newteam');
+Route::post('/corporation/newpersonal/{id}/cambiarStatus',['middleware' => 'auth', 'uses' => 'CorporationController@cambiarStatus']);
 
 Route::get('/announcements', 'announcement@getAnnouncements');
 
@@ -38,3 +42,4 @@ Route::get('/corporation/dashboard/misConvocatorias/{id}','announcement@announce
 
 Route::get('/corporation/dashboard/misConvocatorias/{id}/edit', 'announcement@editAnnouncement');
 Route::post('/corporation/dashboard/update/{id}','announcement@updateAnnouncement');
+
