@@ -77,7 +77,7 @@
     </div>
   </div>
 </div>
-<h1>{{$personal->idCorporation}}</h1>
+
 <script>
     $(document).ready(function(){
 
@@ -109,7 +109,7 @@
                  $(this).attr('value',null);                    
              }
              $.ajax({
-                 url:'/corporation/newpersonal'+$(this).attr("id")+'/cambiarStatus',
+                 url:'/corporation/newpersonal/'+$(this).attr("id")+'/cambiarStatus',
                  type:'POST',
                  dataType:'json',
                  data:{

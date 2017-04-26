@@ -35,7 +35,7 @@ class CorporationController extends Controller
           $personal = DB::table('users')
             ->join('personals', 'users.id', '=', 'personals.user_id')
             ->select('users.name','users.email','personals.phoneNumber')
-            ->where('idCorporation',$id)
+            ->where('personals.idCorporation',$id)
             ->get();          
         return view('Corporation.myteam',['personal'=>$personal]);
     }
