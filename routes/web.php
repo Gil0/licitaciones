@@ -25,9 +25,9 @@ Route::post('/postRegister/{role}', 'HomeController@postRegister');
 Route::get('/corporation/dashboard','CorporationController@index');
 Route::get('/personal/dashboard','PersonalController@index');
 
-
+/*----MyTeam-----*/
 Route::get('/corporation/myteam/{id}','CorporationController@myteam');
-
+Route::get('/corporation/newpersonal/{id}','CorporationController@newteam');
 
 Route::get('/announcements', 'announcement@getAnnouncements');
 
