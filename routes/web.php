@@ -29,8 +29,7 @@ Route::get('/personal/dashboard','PersonalController@index');
 Route::get('/announcements', 'announcement@getAnnouncements');
 
 /*-----Projects-----*/
-Route::get('/personal/projects','PersonalController@projects');
-Route::get('/corporation/projects','CorporationController@projects');
+Route::get('/projects/{id}','announcement@getProjects');
 
 Route::get('/personal/dashboard/misConvocatorias/{id}','announcement@announcement');
 Route::get('/corporation/dashboard/misConvocatorias/{id}','announcement@announcement');

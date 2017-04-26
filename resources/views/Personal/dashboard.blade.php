@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
 <style>
 	@import url('https://fonts.googleapis.com/css?family=Anton');
     @import url('https://fonts.googleapis.com/css?family=Oswald');
@@ -90,13 +93,13 @@
 				<li class ="MisConvocatorias" value="{{Auth::user()->id}}"><a >Mis convocatorias</a></li>
             </ul>
         </li>
-		<li><a class="letternav" href="{{url ('/personal/projects')}}">Proyecto</a></li>
+		<li class="MisProyectos" value="{{Auth::user()->id}}"><a class="letternav">Proyecto</a></li>
 	</ul>
 </div>
 <div>
 	<div class="col-md-12 banner">
 		<img class="imgbanner" src="Imagenes/banner.png">
-        <center><h1 class="letterbanner">{{ Auth::user()->name }} Bienvenido a</h1></center>
+        <center><h1 class="letterbanner">{{ Auth::user()->name }} bienvenido a</h1></center>
         <h1 class="letterbanner">LiciTop</h1>
         <center><img class="iconbanner" src="Imagenes/list.png"></center>
 	</div>
@@ -123,4 +126,11 @@
         <p>LiciTop - Todos los derechos reservados.</p>
     </footer>
 </div>
+<script>
+  $(document).ready(function(){
+     $('li.MisProyectos').click(function(){
+        window.location.href = '/projects/' +$(this).attr('value');
+     });
+  });     
+</script>
 @endsection

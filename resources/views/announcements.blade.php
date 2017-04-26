@@ -27,7 +27,7 @@
                  <li class ="MisConvocatorias" value="{{Auth::user()->id}}"><a >Mis convocatorias</a></li>
             </ul>
         </li>
-		<li><a class="letternav" href="#">Proyecto</a></li>
+		<li><a class="letternav" href="{{url ('/corporation/projects')}}">Proyecto</a></li>
 		<li><a class="letternav" href="#">Mi equipo</a></li>
 	</ul>
 </div>

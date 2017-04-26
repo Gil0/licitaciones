@@ -93,14 +93,14 @@
 				<li class ="MisConvocatorias" value="{{Auth::user()->id}}"><a >Mis convocatorias</a></li>
             </ul>
         </li>
-		<li><a class="letternav" href="{{url ('/corporation/projects')}}">Proyecto</a></li>
+		<li class="MisProyectos" value="{{Auth::user()->id}}"><a class="letternav">Proyecto</a></li>
 		<li><a class="letternav" href="#">Mi equipo</a></li>
 	</ul>
 </div>
 <div>
 	<div class="col-md-12 banner">
 		<img class="imgbanner" src="../Imagenes/banner.png">
-        <center><h1 class="letterbanner">{{ Auth::user()->name }} Bienvenido a</h1></center>
+        <center><h1 class="letterbanner">{{ Auth::user()->name }} bienvenido a</h1></center>
         <h1 class="letterbanner">LiciTop</h1>
         <center><img class="iconbanner" src="../Imagenes/list.png"></center>
 	</div>
@@ -136,6 +136,11 @@
 	  });
 
   });
+  $(document).ready(function(){
+     $('li.MisProyectos').click(function(){
+        window.location.href = '/projects/' +$(this).attr('value');
+     });
+  });     
 </script>
 
 @endsection
