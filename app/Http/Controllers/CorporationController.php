@@ -56,4 +56,9 @@ class CorporationController extends Controller
         return view('.projects');
     }   
 
+     public function cambiarStatus(Request $request, $id)
+    {
+        $evento = DB::table('personals')->where('id',$id)->update(['idCorporation' => $request->status]);        
+        return json_encode('ok');
+    }
 }

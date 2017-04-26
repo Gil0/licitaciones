@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content') 
+<meta name="csrf_token" content="{{ csrf_token() }}" /> <!--Se necestia este metadato para poder hacer AJAX, se envia el csrf_token al server para validar que si existe la sesion -->
+ <link rel="stylesheet" href="{!!asset('css/bootstrap.min.css')!!}">
+ <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <style>
 	@import url('https://fonts.googleapis.com/css?family=Anton');
     @import url('https://fonts.googleapis.com/css?family=Oswald');
@@ -62,7 +65,7 @@
               <th class="text-center">
                 <div class="btn-group">
                     <button type="button" class="btn btn-default" style="width:100%;" id="{{$personal->id}}" value="{{$personal->idCorporation}}">
-                    <i class="fa fa-bullseye" aria-hidden="false">Agregar</i>
+                    <i id="buttonState" class="fa fa-bullseye" aria-hidden="false">Agregar</i>
                     </button>
                 </div>
               </th>              
@@ -74,37 +77,43 @@
     </div>
   </div>
 </div>
+<h1>{{$personal->idCorporation}}</h1>
 <script>
     $(document).ready(function(){
 
       $('.rowsTabla>th>div>button').each(function(){
-             if($(this).attr('value') == null){
+             if($(this).attr('value') == ''){
                  $(this).addClass("btn btn-danger");
              }
              else{
-                 $(this).addClass("btn-success");
+                 $(this).addClass("btn-success");                 
              }
          });
 
          $('.rowsTabla > th > div > button').click(function(){
              //alert($(this).attr('id'));
-             if($(this).attr('value') == 0)
+             if($(this).attr('value') == '')
              {
                  $(this).removeClass('btn-danger');
+                 $(this).text('!Agregar!');
                  $(this).addClass('btn-success');
-                 $(this).attr('value',1);
+                 $(this).attr('value',$(this).attr("id"));
+                $(this).text('!Agregado!');
+                
              }
              else{
+                 $(this).text('!Agregado!');
                  $(this).removeClass('btn-success');
-                 $(this).addClass('btn-danger');
-                 $(this).attr('value',0);
+                 $(this).text('!Agregar!');
+                 $(this).addClass('btn-danger');                 
+                 $(this).attr('value',null);                    
              }
              $.ajax({
                  url:'/corporation/newpersonal'+$(this).attr("id")+'/cambiarStatus',
                  type:'POST',
                  dataType:'json',
                  data:{
-                     'idCorporation': $(this).attr('value')
+                     'status': $(this).attr('value')
                  },beforeSend: function (xhr) {                                      //Antes de enviar la peticion AJAX se incluye el csrf_token para validar la sesion.
                     var token = $('meta[name="csrf_token"]').attr('content');
 

@@ -28,6 +28,7 @@ Route::get('/personal/dashboard','PersonalController@index');
 /*----MyTeam-----*/
 Route::get('/corporation/myteam/{id}','CorporationController@myteam');
 Route::get('/corporation/newpersonal/{id}','CorporationController@newteam');
+Route::post('/corporation/newpersonal/{id}/cambiarStatus',['middleware' => 'auth', 'uses' => 'CorporationController@cambiarStatus']);
 
 Route::get('/announcements', 'announcement@getAnnouncements');
 
