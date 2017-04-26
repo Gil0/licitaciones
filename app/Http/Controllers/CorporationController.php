@@ -34,29 +34,26 @@ class CorporationController extends Controller
     {
           $personal = DB::table('users')
             ->join('personals', 'users.id', '=', 'personals.user_id')
-            ->select('users.name','users.email','personals.area','personals.phoneNumber',
-            'personals.address','personals.rfc','personals.zipCode','personals.idCorporation')
+            ->select('users.name','users.email','personals.phoneNumber')
             ->where('idCorporation',$id)
-            ->get();  
-
+            ->get();          
         return view('Corporation.myteam',['personal'=>$personal]);
-
     }
 
-    public function newteam()
+    public function newteam(Request $request, $id)
     {
           $personal = DB::table('users')
             ->join('personals', 'users.id', '=', 'personals.user_id')
             ->select('users.name','users.email','personals.area','personals.phoneNumber',
-            'personals.address','personals.rfc','personals.zipCode','personals.idCorporation')
+            'personals.address','personals.rfc','personals.zipCode','personals.idCorporation','personals.id')
             ->where('idCorporation',NULL)
             ->get();  
-
-        return view('Corporation.myteam',['personal'=>$personal]);
-
+        return view('Corporation.newpersonal',['personal'=>$personal]);
     }
+
     public function projects()
     {
         return view('.projects');
-    }
+    }   
+
 }
