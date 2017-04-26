@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
-
 class announcement extends Controller
 {
     /**
@@ -29,6 +28,23 @@ class announcement extends Controller
     public function getProjects(Request $request,$id){
         $projects =  DB::table('projects')->where('id',$id)->get();
          return view('projects',['projects'=>$projects]);
+    }
+
+    public function editAnnouncement(Request $request, $id){
+        $announcement = DB::table('announcements')->where('id', $id)->first();
+        return view('EditAnnouncement', ['announcement' => $announcement]);
+    }
+    public function updateAnnouncement(Request $request, $id){
+        DB::table('announcements')->where('id',$id)
+            ->update(['name'=>$request->name,
+            'category' => $request->category,
+            'duration' => $request->duration,
+            'budget' => $request->budget,
+            'description' => $request->description,
+            'user_id' => $request->user_id,
+        ]);
+        $announcements =  DB::table('announcements')->where('id',$id)->get();
+         return view('/Corporation/convocatoria',['announcements'=>$announcements]);
     }
     /**
      * Show the form for creating a new resource.

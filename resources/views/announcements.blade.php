@@ -2,6 +2,7 @@
 
 @section('content')
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 <style>
 	@import url('https://fonts.googleapis.com/css?family=Anton');
     @import url('https://fonts.googleapis.com/css?family=Oswald');
@@ -53,7 +54,7 @@
               <th scope="row">{{$announcements->id}}</th>
               <th >{{$announcements->name}}</th>
               <th >{{$announcements->category}}</th>
-              <th class="text-right"><i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$announcements->id}}"></i></th>
+              <th ><i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$announcements->id}}"></i></th>
             </tr>
             @endforeach
           </tbody>
