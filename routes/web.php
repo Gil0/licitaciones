@@ -38,3 +38,7 @@ Route::get('/corporation/dashboard/misConvocatorias/{id}','announcement@announce
 
 Route::get('/corporation/dashboard/misConvocatorias/{id}/edit', 'announcement@editAnnouncement');
 Route::post('/corporation/dashboard/update/{id}','announcement@updateAnnouncement');
+
+
+Route::post('/corporation/dashboard/misConvocatorias/{id}/delete','announcement@deleteAnnouncement');
+Route::get('/corporation/dashboard/misConvocatorias/{id}/ver', 'announcement@verAnnouncement');

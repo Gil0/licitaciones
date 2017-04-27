@@ -48,6 +48,7 @@
                                 <th class="head">Categoria</th>
                                 <th class="head"> Ver mas </th> 
                                 <th class="head"> Editar </th> 
+                                <th class="head">Eliminar</th>
                             </tr>
                         </thread>
                         <tbody>
@@ -58,6 +59,7 @@
                                     <th >{{$announcements->category}}</th>
                                     <th><i class="fa fa-plus-circle fa-2x"  value="{{$announcements->id}}"></i></th>
                                     <th><i class="fa fa-pencil-square fa-2x" value="{{$announcements->id}}"></i></th>
+                                    <th><i class="fa fa-trash-o fa-2x" value="{{$announcements->id}}"></i></th>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -144,15 +146,15 @@
   </div>
 </div>
 
-<!-- modal seguridad eliminar evento-->
-<div class="modal fade" id="eliminarEvento" tabindex="-1" role="dialog" aria-labelledby="Eliminar Evento">
+<!-- modal seguridad eliminar Convocatoria-->
+<div class="modal fade" id="eliminarConvocatoria" tabindex="-1" role="dialog" aria-labelledby="Eliminar Convocatoria">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
            <p class="lead" style="text-align:center;">Estas seguro de eliminar la Convocatoria ?</p>
       </div>
       <div class="modal-footer">
-        <form method="POST" action="" id="eliminarEvento">
+        <form method="POST" id="eliminarConvocatoria">
             {{ csrf_field() }}
             <button type="submit" class="btn btn-danger" style="width:100%;">SI</button>
         </form>
@@ -165,10 +167,19 @@
 
 <script>
     $(document).ready(function(){
-        $('i').click(function(){
+        $('i.fa-pencil-square').click(function(){
            window.location.href = '/corporation/dashboard/misConvocatorias/'+$(this).attr('value')+ '/edit';
+        });
+
+        $('i.fa-trash-o').click(function(){
+            $('#eliminarConvocatoria').modal('show');
+            $('form#eliminarConvocatoria').attr('action','/corporation/dashboard/misConvocatorias/'+$(this).attr('value')+ '/delete');
+        });
+         $('i.fa-plus-circle').click(function(){
+           window.location.href = '/corporation/dashboard/misConvocatorias/'+$(this).attr('value')+ '/ver';
         });
     });
     </script>
+
 
 @endsection
