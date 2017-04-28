@@ -25,7 +25,7 @@
                 <li class ="MisConvocatorias" value="{{Auth::user()->id}}"><a >Mis convocatorias</a></li>
             </ul>
         </li>
-		<li><a class="letternav" href="#">Proyecto</a></li>
+		<li class="MisProyectos" value="{{Auth::user()->id}}"><a class="letternav">Proyecto</a></li>
 		<li><a class="letternav" href="#">Mi equipo</a></li>
 	</ul>
 </div>
@@ -178,6 +178,9 @@
          $('i.fa-plus-circle').click(function(){
            window.location.href = '/corporation/dashboard/misConvocatorias/'+$(this).attr('value')+ '/ver';
         });
+         $('li.MisProyectos').click(function(){
+		 window.location.href = '/projects/' +$(this).attr('value');
+	  });
     });
     </script>
 

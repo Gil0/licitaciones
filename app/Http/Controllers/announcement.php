@@ -26,7 +26,11 @@ class announcement extends Controller
     }
     /*------Projects-----*/
     public function getProjects(Request $request,$id){
-        $projects =  DB::table('projects')->where('id',$id)->get();
+        $projects =  DB::table('projects')
+        ->join('announcements', 'projects.announcement_id','=','announcements.id')
+        ->select('projects.*','announcements.name', 'announcements.budget', 'announcements.description')
+        ->where('projects.user_id',$id)
+        ->get();    
          return view('projects',['projects'=>$projects]);
     }
 
@@ -149,6 +153,25 @@ class announcement extends Controller
         return view('Corporation/Vermas', ['announcement' => $announcement]);
     }
  
-     
+     public function addProject(Request $request, $id){
+          DB::table('projects')->insert([
+            'cost' => $request->cost,
+            'duration' => $request->duration,
+             'description' => $request->description,
+            'user_id' => $request->user_id,
+            'announcement_id' => $id,
+        ]);
+        return redirect()->action('announcement@getAnnouncements');
+     }
+
+      public function verProjects(Request $request,$id){
+        $projects =  DB::table('projects')
+        ->join('announcements', 'projects.announcement_id','=','announcements.id')
+        ->select('projects.*','announcements.*')
+        ->where('projects.id',$id)
+        ->first();
+        
+         return view('verProject',['projects'=>$projects]);
+    }
 
 }

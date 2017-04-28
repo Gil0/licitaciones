@@ -42,3 +42,7 @@ Route::post('/corporation/dashboard/update/{id}','announcement@updateAnnouncemen
 
 Route::post('/corporation/dashboard/misConvocatorias/{id}/delete','announcement@deleteAnnouncement');
 Route::get('/corporation/dashboard/misConvocatorias/{id}/ver', 'announcement@verAnnouncement');
+
+Route::post('/corporation/dashboard/crearProyecto/{id}','announcement@addProject');
+
+Route::get('/projects/{id}/ver', 'announcement@verProjects');
