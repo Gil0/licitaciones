@@ -25,13 +25,8 @@
                 <li class ="MisConvocatorias" value="{{Auth::user()->id}}"><a >Mis convocatorias</a></li>
             </ul>
         </li>
-		<li><a class="letternav" href="{{url ('/corporation/projects')}}">Proyecto</a></li>
-		<li><a href="#" class="letternav dropdown-toggle" data-toggle="dropdown">Mi Equipo<b class="caret"></b></a>
-            <ul class="dropdown-menu">                				
-                <li><a href="{{url('/corporation/myteam/'.Auth::user()->id)}}">Mi Personal</a></li>
-                <li><a href="{{url('/corporation/newpersonal/'.Auth::user()->id)}}">Nuevo Personal</a></li>
-            </ul>
-        </li>
+		<li class="MisProyectos" value="{{Auth::user()->id}}"><a class="letternav">Proyecto</a></li>
+		<li><a class="letternav" href="#">Mi equipo</a></li>
 	</ul>
 </div>
 
@@ -53,6 +48,7 @@
                                 <th class="head">Categoria</th>
                                 <th class="head"> Ver mas </th> 
                                 <th class="head"> Editar </th> 
+                                <th class="head">Eliminar</th>
                             </tr>
                         </thread>
                         <tbody>
@@ -63,6 +59,7 @@
                                     <th >{{$announcements->category}}</th>
                                     <th><i class="fa fa-plus-circle fa-2x"  value="{{$announcements->id}}"></i></th>
                                     <th><i class="fa fa-pencil-square fa-2x" value="{{$announcements->id}}"></i></th>
+                                    <th><i class="fa fa-trash-o fa-2x" value="{{$announcements->id}}"></i></th>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -149,15 +146,15 @@
   </div>
 </div>
 
-<!-- modal seguridad eliminar evento-->
-<div class="modal fade" id="eliminarEvento" tabindex="-1" role="dialog" aria-labelledby="Eliminar Evento">
+<!-- modal seguridad eliminar Convocatoria-->
+<div class="modal fade" id="eliminarConvocatoria" tabindex="-1" role="dialog" aria-labelledby="Eliminar Convocatoria">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
            <p class="lead" style="text-align:center;">Estas seguro de eliminar la Convocatoria ?</p>
       </div>
       <div class="modal-footer">
-        <form method="POST" action="" id="eliminarEvento">
+        <form method="POST" id="eliminarConvocatoria">
             {{ csrf_field() }}
             <button type="submit" class="btn btn-danger" style="width:100%;">SI</button>
         </form>
@@ -170,10 +167,22 @@
 
 <script>
     $(document).ready(function(){
-        $('i').click(function(){
+        $('i.fa-pencil-square').click(function(){
            window.location.href = '/corporation/dashboard/misConvocatorias/'+$(this).attr('value')+ '/edit';
         });
+
+        $('i.fa-trash-o').click(function(){
+            $('#eliminarConvocatoria').modal('show');
+            $('form#eliminarConvocatoria').attr('action','/corporation/dashboard/misConvocatorias/'+$(this).attr('value')+ '/delete');
+        });
+         $('i.fa-plus-circle').click(function(){
+           window.location.href = '/corporation/dashboard/misConvocatorias/'+$(this).attr('value')+ '/ver';
+        });
+         $('li.MisProyectos').click(function(){
+		 window.location.href = '/projects/' +$(this).attr('value');
+	  });
     });
     </script>
+
 
 @endsection

@@ -139,7 +139,7 @@
 <script>
   $(document).ready(function(){
 	  $('li.MisConvocatorias').click(function(){
-		 window.location.href = '/corporation/dashboard/misConvocatorias/' +$(this).attr('value');
+		 window.location.href = '/corporation/dashboard/misConvocatorias/'+$(this).attr('value');
 		 
 	  });
 
