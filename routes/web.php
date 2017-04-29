@@ -26,11 +26,10 @@ Route::get('/corporation/dashboard','CorporationController@index');
 Route::get('/personal/dashboard','PersonalController@index');
 
 /*----MyTeam-----*/
-Route::get('/corporation/myteam/{id}','CorporationController@myteam');
-Route::get('/corporation/newpersonal/{id}','CorporationController@newteam');
-Route::post('/corporation/newpersonal/{id}/cambiarStatus',['middleware' => 'auth', 'uses' => 'CorporationController@cambiarStatus']);
-
 Route::get('/announcements', 'announcement@getAnnouncements');
+Route::get('/corporation/myTeam/{id}','CorporationController@myteam');
+Route::get('/corporation/newTeam/{id}','CorporationController@newteam');
+Route::post('/corporation/newTeam/{id}/cambiarStatus','CorporationController@cambiarStatus');
 
 /*-----Projects-----*/
 Route::get('/projects/{id}','announcement@getProjects');
