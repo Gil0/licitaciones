@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\User;
+use App\Corporation;
+use App\Personal;
+use Auth;
 
 class CorporationController extends Controller
 {
@@ -45,7 +49,7 @@ class CorporationController extends Controller
           $personal = DB::table('users')
             ->join('personals', 'users.id', '=', 'personals.user_id')
             ->select('users.name','users.email','personals.area','personals.phoneNumber',
-            'personals.address','personals.rfc','personals.zipCode','personals.idCorporation','personals.id')
+            'personals.address','personals.rfc','personals.zipCode','personals.idCorporation','users.id')
             ->where('idCorporation',NULL)
             ->get();  
         return view('Corporation.newpersonal',['personal'=>$personal]);
@@ -57,9 +61,13 @@ class CorporationController extends Controller
     }   
 
      public function cambiarStatus(Request $request, $id)
-    {
-        $evento = DB::table('personals')->where('id',$id)->update(['idCorporation' => $request->status]);        
-        return json_encode('ok');
+    {    
+        if($request->idCorporation==0){
+            $evento = DB::table('personals')->where('user_id',$request->idPersonal)->update(['idCorporation' => NULL]);        
+            return json_encode('ok');
+        }else{
+            $evento = DB::table('personals')->where('user_id',$request->idPersonal)->update(['idCorporation' => $request->idCorporation]);        
+            return json_encode('ok');
+        }                
     }
-
 }

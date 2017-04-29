@@ -26,15 +26,13 @@
                  <li class ="MisConvocatorias" value="{{Auth::user()->id}}"><a >Mis convocatorias</a></li>
 	            </ul>
 	        </li>
-			<li class="MisProyectos" value="{{Auth::user()->id}}"><a class="letternav">Proyecto</a></li>
-			<li><a class="letternav" href="#">Mi equipo</a></li>
-			<li><a class="letternav" href="{{url ('/personal/projects')}}">Proyecto</a></li>
-			<li><a href="#" class="letternav dropdown-toggle" data-toggle="dropdown">Mi Equipo<b class="caret"></b></a>
-      			<ul class="dropdown-menu">                				
-        			<li><a href="{{url('/corporation/myteam/'.Auth::user()->id)}}">Mi Personal</a></li>
-        			<li><a href="{{url('/corporation/newpersonal/'.Auth::user()->id)}}">Nuevo Personal</a></li>
-      			</ul>
-    		</li>		
+			<li class="MisProyectos" value="{{Auth::user()->id}}"><a class="letternav">Proyecto</a></li>		
+        <li><a href="#" class="letternav dropdown-toggle" data-toggle="dropdown">Mi Equipo<b class="caret"></b></a>
+            <ul class="dropdown-menu">                				
+                <li class ="MiPersonal" value="{{Auth::user()->id}}"><a >Mis Personal</a></li>
+                <li class ="NuevoPersonal" value="{{Auth::user()->id}}"><a >Nuevo Personal</a></li>
+            </ul>
+        </li>	
 		@else
 			<li><a href="#" class="letternav dropdown-toggle" data-toggle="dropdown">Convocatoria<b class="caret"></b></a>
 	            <ul class="dropdown-menu">
@@ -85,9 +83,15 @@
 		$('li.MisConvocatorias').click(function(){
 		 window.location.href = '/corporation/dashboard/misConvocatorias/' +$(this).attr('value');
 	  });
-		 $('i.fa-plus-circle').click(function(){
-           window.location.href = '/projects/'+$(this).attr('value')+ '/ver';
-        });
+		$('i.fa-plus-circle').click(function(){
+    	window.location.href = '/projects/'+$(this).attr('value')+ '/ver';
+    });
+		$('li.MiPersonal').click(function(){
+	    window.location.href = '/corporation/myTeam/'+$(this).attr('value');		 
+    });    
+    $('li.NuevoPersonal').click(function(){
+	    window.location.href = '/corporation/newTeam/'+$(this).attr('value');		 
+    });
   });
 </script>
 @endsection
