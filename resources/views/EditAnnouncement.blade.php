@@ -16,7 +16,7 @@
 		font-family: 'Oswald', sans-serif; 
 	}
    .fa-plus-circle{
-    barckground-color: green;
+    background-color: green;
   }
 </style>
 <div class="navar">
@@ -59,7 +59,7 @@
                             <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelar">Cerrar</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelar">Cancelar</button>
                             <button type="submit" class="btn btn-primary" id="crearConvocatoria">Guardar</button>
                         </div>
                     </form>
@@ -76,7 +76,7 @@
 		 window.location.href = '/corporation/dashboard/misConvocatorias/' +$(this).attr('value');
 		 
 	  });
-
+    
   });
 </script>
 @endsection

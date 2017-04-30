@@ -94,7 +94,7 @@
             </ul>
         </li>
 		<li class="MisProyectos" value="{{Auth::user()->id}}"><a class="letternav">Proyecto</a></li>
-		<li><a class="letternav" href="#">Mi equipo</a></li>
+		<li><a class="letternav" href="/corporation/team">Mi equipo</a></li>
 	</ul>
 </div>
 <div>

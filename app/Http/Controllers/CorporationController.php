@@ -29,4 +29,14 @@ class CorporationController extends Controller
 
         return view('Corporation.dashboard');
     }
+    
+    public function team()
+    {
+        return view('Corporation.team');
+    }
+    
+    public function newMember(Request $request)
+    {
+        return $request->all();
+    }
 }
