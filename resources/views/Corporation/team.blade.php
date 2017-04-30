@@ -64,7 +64,7 @@
                 <button style="width:100%;" class="form-control" id="newMember">Nuevo Integrante</button>
             </div>
             <div class="col-md-12">
-                Integrantes Lista
+                <section id="membersList"></section>
             </div>
         </div>
         <div class="col-md-8">
@@ -76,7 +76,7 @@
                 </section>
                 
                 <section id="newMember" hidden>
-                    <row>
+                    <div class="row">
                         <div class="col-md-2">
                             <img style="height:100px;width:auto;" class="responsive" src="{!!asset('Imagenes/avatar-new.png')!!}">
                         </div>
@@ -85,15 +85,25 @@
                             <br>
                             <input placeholder="Area Desempeño" type="text" style="width:100%;" class="form-control" name="area"/>
                         </div>
-                    </row>
-                    <br>
-                    <row>
-                        <div class="col-md-12">
-                            <div class="col-md-1">
-                                <img style="height:50px; width:auto; transform:translate(-15px,0);" class="responsive" src="{!! asset('Imagenes/email.png') !!}"></img>
-                            </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img style="height:100px;width:auto;" class="responsive" src="{!! asset('Imagenes/email.png') !!}">
                         </div>
-                    </row>
+                        <div class="col-md-10">
+                            <input style="width:100%;transform:translate(0,90%);" class="form-control" type="text" name="email" placeholder="email"/>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn btn-success" style="width:90%;" id="addMember">Añadir</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-danger" style="width:90%;" id="cancelar">Cancelar</button>
+                        </div>
+                    </div>
                 </section>
                 
             </div>
@@ -102,11 +112,52 @@
 </div>
 
 <script type="text/javascript">
+
+    function getMembers(){
+        $.ajax({
+                 url: '/corporation/team/members',
+                type: 'post',
+            dataType: 'json',
+             headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+             },
+             success: function(response){
+                 $("section#membersList").append(response);
+             }
+        });
+    }
+    
     $(document).ready(function(){
+       getMembers(); 
        $("button#newMember").click(function(){
            $("section#mainSection").prop('hidden',true);
            $("section#newMember").prop('hidden',false);
        }) ;
+       $("button#cancelar").click(function(){
+          $("input").val('');
+          $("section#newMember").prop('hidden',true);
+          $("section#mainSection").prop('hidden',false);
+       });
+       $("button#addMember").click(function(){
+            $.ajax({
+                url: '/corporation/team/addMember',
+               type: 'post',
+           dataType: 'json',
+               data: {
+                   'nombre' : $('input[name=nombre]').val(),
+                     'area' : $('input[name=area]').val(),
+                    'email' : $('input[name=email]').val()
+                    
+               },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (){
+                
+            }
+          });
+          $("input").val('');
+       });
     });
     
 </script>

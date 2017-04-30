@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class CorporationController extends Controller
 {
@@ -35,8 +36,33 @@ class CorporationController extends Controller
         return view('Corporation.team');
     }
     
-    public function newMember(Request $request)
+    public function addMember(Request $request)
     {
-        return $request->all();
+        //seledd($request->all());
+        
+                  $User = new \App\User;
+            $User->name = $request->nombre;
+            $User->email= $request->email;
+            $User->role = 'Personal';
+        $User->password = 'password';
+                  $User->save();
+                  
+                 $PersonalInfo = new \App\Personal;
+           $PersonalInfo->area = $request->area;
+        $PersonalInfo->user_id = $User->id;
+                  $PersonalInfo->save();
+                  
+                  
+                  $Team_Member = new \App\Team;
+         $Team_Member->user_id = $User->id;
+  $Team_Member->corporation_id = Auth::user()->id;
+                  $Team_Member->save();
+        
+        return 'ok';
+    }
+    
+    public function members()
+    {
+        return "ok controller";
     }
 }

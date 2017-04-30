@@ -33,4 +33,9 @@ class Corporation extends Model
     {
     	return $this->belongsTo('App\User');
     }
+    
+    public function Personal()
+    {
+        return $this->hasMany('App\Personal','teams');
+    }
 }
