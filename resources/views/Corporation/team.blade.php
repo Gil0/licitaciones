@@ -2,6 +2,75 @@
 
 @section('content')
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="application/javascript">
+
+    function getMembers(){
+        $("section#membersList").children().remove();
+        $.ajax({
+                 url: '/corporation/team/members',
+                type: 'post',
+            dataType: 'json',
+             headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+             },
+             success: function(response){
+                 for(var i=0; i<response.length; i++){
+                     $("section#membersList").append(
+                        '<div class="container-fluid" style="padding-top:10px;">'+
+                            '<div class="row">'+
+                                '<div class="col-sm-2">'+
+                                    '<img style="height:50px;width:auto;border-radius:50%;" class="responsive" src="{!!asset('Imagenes/avatar-new.png')!!}">'+
+                                '</div>'+
+                                '<div class="col-sm-10>'+
+                                    '<div class="row">'+
+                                        '<div class="row">'+
+                                            '<p class="lead" style="font-size:90%; transform:translate(3%,80%);">'+response[i].name+'</p>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'
+                     );
+                }
+             }
+        });
+    }
+    
+    $(document).ready(function(){
+       getMembers(); 
+       $("button#newMember").click(function(){
+           $("section#mainSection").prop('hidden',true);
+           $("section#newMember").prop('hidden',false);
+       }) ;
+       $("button#cancelar").click(function(){
+          $("input").val('');
+          $("section#newMember").prop('hidden',true);
+          $("section#mainSection").prop('hidden',false);
+       });
+       $("button#addMember").click(function(){
+            $.ajax({
+                url: '/corporation/team/addMember',
+               type: 'post',
+           dataType: 'json',
+               data: {
+                   'nombre' : $('input[name=nombre]').val(),
+                     'area' : $('input[name=area]').val(),
+                    'email' : $('input[name=email]').val()
+                    
+               },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (){
+                getMembers();
+            }
+          });
+          $("input").val('');
+       });
+    });
+    
+</script>
+
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 <style>
 	@import url('https://fonts.googleapis.com/css?family=Anton');
@@ -61,9 +130,9 @@
         <div class="col-md-4">
             <br>
             <div class="col-md-12">
-                <button style="width:100%;" class="form-control" id="newMember">Nuevo Integrante</button>
+                <center><button style="width:85%;" class="form-control" id="newMember">Nuevo Integrante</button></center>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12" style="padding-top:10px;">
                 <section id="membersList"></section>
             </div>
         </div>
@@ -110,56 +179,4 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-
-    function getMembers(){
-        $.ajax({
-                 url: '/corporation/team/members',
-                type: 'post',
-            dataType: 'json',
-             headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-             },
-             success: function(response){
-                 $("section#membersList").append(response);
-             }
-        });
-    }
-    
-    $(document).ready(function(){
-       getMembers(); 
-       $("button#newMember").click(function(){
-           $("section#mainSection").prop('hidden',true);
-           $("section#newMember").prop('hidden',false);
-       }) ;
-       $("button#cancelar").click(function(){
-          $("input").val('');
-          $("section#newMember").prop('hidden',true);
-          $("section#mainSection").prop('hidden',false);
-       });
-       $("button#addMember").click(function(){
-            $.ajax({
-                url: '/corporation/team/addMember',
-               type: 'post',
-           dataType: 'json',
-               data: {
-                   'nombre' : $('input[name=nombre]').val(),
-                     'area' : $('input[name=area]').val(),
-                    'email' : $('input[name=email]').val()
-                    
-               },
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function (){
-                
-            }
-          });
-          $("input").val('');
-       });
-    });
-    
-</script>
-
 @endsection

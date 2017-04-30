@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use DB;
 
 class CorporationController extends Controller
 {
@@ -58,11 +59,13 @@ class CorporationController extends Controller
   $Team_Member->corporation_id = Auth::user()->id;
                   $Team_Member->save();
         
-        return 'ok';
+        return json_encode('ok');
     }
     
     public function members()
     {
-        return "ok controller";
+        $Members = DB::table('users')->join('personals','personals.user_id','=','users.id')
+                                     ->join('teams','teams.user_id','users.id')->select('*')->get();
+        return json_encode($Members);
     }
 }
