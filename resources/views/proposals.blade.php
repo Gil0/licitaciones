@@ -19,6 +19,24 @@
        $('button#cancel').click(function(){
           window.location.replace('/home');
        });
+       $('button#submit').click(function(){
+          $.ajax({
+             url: '/proposal/new',
+            type: 'post',
+           async: false,
+            data: {
+              'proposal' : $('textarea#description').val(),
+              'receiver' : {!!$announcement['user_id']!!}
+            },
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function()
+            {
+              window.location.replace('/home');
+            }
+          });
+       });
     });
 </script>
 
@@ -57,11 +75,7 @@
     background-color: #5cb85c;
     color: white; 
   } 
-  body {
-    overflow-y:hidden;
-  }
 </style>
-
 <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
@@ -93,7 +107,7 @@
                   </section>
                   <section id="proposal" hidden>
                       <center>
-                          <textarea style="width:100%;" rows="15" placeholder="Escribe tu propuesta aquí"></textarea>
+                          <textarea id="description" style="width:100%;" rows="15" placeholder="Escribe tu propuesta aquí"></textarea>
                           <button id="submit" class="btn btn-info" style="width:49%;">Aceptar</button>
                           <button id="cancel" class="btn btn-danger" style="width:49%;">Cancelar</button>
                       </center>
