@@ -14,7 +14,6 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
              },
              success: function(response){
-               alert(JSON.stringify(response));
                  for(var i=0; i<response.length; i++){
                      $("section#announcementsList").append(
                         '<div class="container-fluid" style="padding-top:10px;" id="announcementInfo">'+
