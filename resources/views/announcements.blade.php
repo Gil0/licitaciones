@@ -249,28 +249,4 @@
         </div>
     </div>
 </div>
-
-<script>
- $(document).ready(function(){
-	  $('li.MisConvocatorias').click(function(){
-		 window.location.href = '/corporation/dashboard/misConvocatorias/' +$(this).attr('value');
-		 
-	  });
-    $('button#Project').click(function(){
-       $('#crearProyecto').modal('show');
-       $('form#crearProyecto').attr('action','/corporation/dashboard/crearProyecto/'+$(this).attr('value'));
-    });
-     $('li.MisProyectos').click(function(){
-		 window.location.href = '/projects/' +$(this).attr('value');
-	  });
-
-  });
- $(document).ready(function(){
-    $('li.MisProyectos').click(function(){
-     window.location.href = '/projects/' +$(this).attr('value');
-     
-    });
-
-  });
-</script>
 @endsection
