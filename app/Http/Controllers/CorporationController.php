@@ -68,4 +68,12 @@ class CorporationController extends Controller
                                      ->join('teams','teams.user_id','users.id')->select('*')->get();
         return json_encode($Members);
     }
+    
+    public function member($id)
+    {
+        $Member = DB::table('users')->join('personals','personals.user_id','=','users.id')
+                                     ->join('teams','teams.user_id','users.id')->select('*')
+                                     ->where('users.id',$id)->first();
+        return json_encode($Member);
+    }
 }

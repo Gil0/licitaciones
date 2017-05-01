@@ -16,7 +16,8 @@
              success: function(response){
                  for(var i=0; i<response.length; i++){
                      $("section#membersList").append(
-                        '<div class="container-fluid" style="padding-top:10px;">'+
+                        '<div class="container-fluid" style="padding-top:10px;" id="memberInfo">'+
+                            '<option hidden>'+response[i].user_id+'</option>'+
                             '<div class="row">'+
                                 '<div class="col-sm-2">'+
                                     '<img style="height:50px;width:auto;border-radius:50%;" class="responsive" src="{!!asset('Imagenes/avatar-new.png')!!}">'+
@@ -41,6 +42,7 @@
        $("button#newMember").click(function(){
            $("section#mainSection").prop('hidden',true);
            $("section#newMember").prop('hidden',false);
+           $('section#memberInfo').prop('hidden',true)
        }) ;
        $("button#cancelar").click(function(){
           $("input").val('');
@@ -69,6 +71,32 @@
        });
     });
     
+    $(document).delegate("div#memberInfo","click",function(){
+       $('section#mainSection').prop('hidden',true);
+       $('section#newMember').prop('hidden',true);
+       $('section#memberInfo').prop('hidden',false).children().remove();
+       
+       $.ajax({
+          url: '/corporation/team/member/'+$(this).find('option').val(),
+          type: 'post',
+          dataType: 'json',
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          success: function(response){
+              $("section#memberInfo").append(
+                '<div class="row">'+
+                    '<div class="col-md-12">'+
+                        '<center>'+
+                            '<img style="height:100px;width:auto;" class="responsive" src="{!!asset('Imagenes/avatar-new.png')!!}">'+
+                            '<p class="lead">'+response.name+'</p>'+
+                        '</center>'+
+                    '</div>'+
+                '</div>'
+              );
+          }
+       });
+    });
 </script>
 
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
@@ -101,6 +129,9 @@
 
 
 <style>
+    div#memberInfo:hover {
+        background-color: #CDCDCD;
+    }
     i.fa-plus-circle{
       color: green;
     }
@@ -141,7 +172,9 @@
             <div class="col-md-12">
                 
                 <section id="mainSection">
-                    Main Section
+                    <div class="well">
+                        Puedes dar click en cualquier miembro para ver información a detalle.
+                    </div>
                 </section>
                 
                 <section id="newMember" hidden>
@@ -173,6 +206,10 @@
                             <button class="btn btn-danger" style="width:90%;" id="cancelar">Cancelar</button>
                         </div>
                     </div>
+                </section>
+                
+                <section id="memberInfo" hidden>
+                    
                 </section>
                 
             </div>

@@ -49,4 +49,5 @@ Route::post('/corporation/dashboard/crearProyecto/{id}','announcement@addProject
 Route::get('/corporation/team' , 'CorporationController@team');
 Route::post('/corporation/team/members' , 'CorporationController@members'); //ajax
 Route::post('/corporation/team/addMember' , 'CorporationController@addMember'); //ajax
+Route::post('/corporation/team/member/{id}' , 'CorporationController@member');
 
