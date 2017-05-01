@@ -25,11 +25,12 @@ class ProposalController extends Controller
 
     public function send(Request $request)
     {
-        //dd($request->all());
         DB::table('proposals')->insert([
             'sender_id' => Auth::user()->id,
           'receiver_id' => $request->receiver,
                'status' =>'Sent',
+          'description' => $request->proposal,
+      'announcement_id' => $request->announcement,
            'created_at' => date("Y-m-d H:i:s")
         ]);
 

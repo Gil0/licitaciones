@@ -110,8 +110,16 @@ class announcement extends Controller
                                     'announcements.budget as presupuesto',
                                     'users.name as empresaSolicitante',
                                     'announcements.id as id'
-                                  )    
-                                ->get();
+                                  )->get();
+            break;
+            case 'request-sent':
+                $Proposals  = DB::table('proposals')
+                            ->join('users','users.id','=','proposals.sender_id')
+                            ->join('announcements','announcements.id','=','proposals.announcement_id')
+                            ->get();
+                
+                $announcements = $Proposals;
+                dd($announcements);
             break;
         }
         return json_encode($announcements);

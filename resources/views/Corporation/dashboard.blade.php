@@ -68,31 +68,42 @@
                        $('div#searchValue').find('input').focus();
                    break;
                    
-                   case 'general':
+                   case 'request-sent':
+                       searchAnnouncementsBy('request-sent',null);
+                       $('section#mainSection').prop('hidden',true);
+                       $('section#announcementInfo').prop('hidden',true);
+                       $('section#results').prop('hidden',false);
+                       $('div#searchValue').prop('hidden',true);
                    break;
                     
                }
             });
-             $('input[name="search"]').keyup(function(){
-                 $('datalist#announcements').children().remove();
-                 searchAnnouncementsBy('area',$(this).val());
-                    $.ajax({
-                            url: '/corporations/areas',
-                           type: 'post',
-                       dataType: 'json',
-                        headers: {
-                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(response)
-                        {
-                            for(var i=0; i<response.length; i++)
+             $('input[name="search"]').keyup(function(event){
+                 if(event.which <= 90 && event.which >= 48)
+                 {
+                      $('datalist#announcements').children().remove();
+                     searchAnnouncementsBy('area',$(this).val());
+                        $.ajax({
+                                url: '/corporations/areas',
+                               type: 'post',
+                           dataType: 'json',
+                            headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function(response)
                             {
-                                $('datalist#announcements').append(
-                                    '<option>'+response[i].workArea+'</option>'
-                                );
+                                for(var i=0; i<response.length; i++)
+                                {
+                                    $('datalist#announcements').append(
+                                        '<option>'+response[i].workArea+'</option>'
+                                    );
+                                }
                             }
-                        }
-                    }); 
+                        }); 
+                      }
+                      else{
+                        return false;
+                      }
              });
         });
         
@@ -213,14 +224,14 @@
                     </div>
                     
                     <div class="row" style="padding-top:10px;" id="search">
-                        <option value="general" hidden></option>
+                        <option value="request-sent" hidden></option>
                         <div class="col-sm-2">
                             <img style="height:50px;width:auto;border-radius:50%;" class="responsive" src="{!!asset('Imagenes/announcement.png')!!}">
                         </div>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="row">
-                                    <p class="lead" style="font-size:90%; transform:translate(18%,80%);"> Busqueda General </p>
+                                    <p class="lead" style="font-size:90%; transform:translate(18%,80%);"> Mis Solicitudes </p>
                                 </div>
                             </div>
                         </div>

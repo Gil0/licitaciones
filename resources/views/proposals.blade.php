@@ -26,7 +26,8 @@
            async: false,
             data: {
               'proposal' : $('textarea#description').val(),
-              'receiver' : {!!$announcement['user_id']!!}
+              'receiver' : {!!$announcement['user_id']!!},
+          'announcement' : {!!$announcement['id']!!}
             },
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
