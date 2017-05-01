@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "4aba34cd69646e8856ef9aa6e4d655c5",
-=======
     "content-hash": "a3081d7d0e8761880e4c85bfc622e732",
->>>>>>> master
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -96,8 +92,6 @@
             ],
             "description": "implementation of xdg base directory specification for php",
             "time": "2014-10-24T07:27:01+00:00"
-<<<<<<< HEAD
-=======
         },
         {
             "name": "doctrine/annotations",
@@ -447,7 +441,6 @@
                 "queryobject"
             ],
             "time": "2017-02-08T12:53:47+00:00"
->>>>>>> master
         },
         {
             "name": "doctrine/inflector",
@@ -515,8 +508,6 @@
                 "string"
             ],
             "time": "2015-11-06T14:35:42+00:00"
-<<<<<<< HEAD
-=======
         },
         {
             "name": "doctrine/lexer",
@@ -571,7 +562,6 @@
                 "parser"
             ],
             "time": "2014-09-09T13:34:57+00:00"
->>>>>>> master
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -845,76 +835,19 @@
                 "laravel"
             ],
             "time": "2017-03-24T16:31:06+00:00"
-<<<<<<< HEAD
-        },
-        {
-            "name": "laravelcollective/html",
-            "version": "v5.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/LaravelCollective/html.git",
-                "reference": "2f7f2e127c6fed47f269ea29ab5efeb8f65e9d35"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/2f7f2e127c6fed47f269ea29ab5efeb8f65e9d35",
-                "reference": "2f7f2e127c6fed47f269ea29ab5efeb8f65e9d35",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/http": "5.3.*",
-                "illuminate/routing": "5.3.*",
-                "illuminate/session": "5.3.*",
-                "illuminate/support": "5.3.*",
-                "illuminate/view": "5.3.*",
-                "php": ">=5.6.4"
-            },
-            "require-dev": {
-                "illuminate/database": "5.3.*",
-                "mockery/mockery": "~0.9.4",
-                "phpunit/phpunit": "~5.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Collective\\Html\\": "src/"
-                },
-                "files": [
-                    "src/helpers.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylorotwell@gmail.com"
-                },
-                {
-                    "name": "Adam Engebretson",
-                    "email": "adam@laravelcollective.com"
-                }
-            ],
-            "description": "HTML and Form Builders for the Laravel Framework",
-            "homepage": "http://laravelcollective.com",
-            "time": "2016-12-13T14:23:36+00:00"
-=======
->>>>>>> master
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.39",
+            "version": "1.0.38",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "2474325ee924134bb05848663b12531f6f2e9fbe"
+                "reference": "4ba6e13f5116204b21c3afdf400ecf2b9eb1c482"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/2474325ee924134bb05848663b12531f6f2e9fbe",
-                "reference": "2474325ee924134bb05848663b12531f6f2e9fbe",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/4ba6e13f5116204b21c3afdf400ecf2b9eb1c482",
+                "reference": "4ba6e13f5116204b21c3afdf400ecf2b9eb1c482",
                 "shasum": ""
             },
             "require": {
@@ -984,11 +917,7 @@
                 "sftp",
                 "storage"
             ],
-<<<<<<< HEAD
-            "time": "2017-04-25T15:24:43+00:00"
-=======
             "time": "2017-04-22T18:59:19+00:00"
->>>>>>> master
         },
         {
             "name": "monolog/monolog",
