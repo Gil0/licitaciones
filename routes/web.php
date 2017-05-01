@@ -36,3 +36,5 @@ Route::get('/corporation/dashboard/misConvocatorias/{id}','announcement@announce
  
  Route::post('/corporation/dashboard/crear/{id}',  ['middleware' , 'uses' => 'announcement@crearConvocatoria']);
 
+Route::get('/corporation/dashboard/misConvocatorias/{id}/edit', 'announcement@editAnnouncement');
+Route::post('/corporation/dashboard/update/{id}','announcement@updateAnnouncement');

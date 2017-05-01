@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <style>
 	@import url('https://fonts.googleapis.com/css?family=Anton');
     @import url('https://fonts.googleapis.com/css?family=Oswald');
@@ -20,8 +21,8 @@
 	    @if(Auth::user()->role == 'Corporation')
 			<li><a href="#" class="letternav dropdown-toggle" data-toggle="dropdown">Convocatoria<b class="caret"></b></a>
 	            <ul class="dropdown-menu">
-	                <li><a href="#">General</a></li>
-	                <li><a href="#">Mis Convocatorias</a></li>
+	                <li><a href="{{url('/announcements')}}">General</a></li>
+	                <li class="MisConvocatorias" value="{{Auth::user()->id}}"><a>Mis Convocatorias</a></li>
 	            </ul>
 	        </li>
 			<li class="MisProyectos" value="{{Auth::user()->id}}"><a class="letternav">Proyecto</a></li>
@@ -68,6 +69,13 @@
   </div>
 </div>
 <script>
+$(document).ready(function(){
+	  $('li.MisConvocatorias').click(function(){
+		 window.location.href = '/corporation/dashboard/misConvocatorias/' +$(this).attr('value');
+		 
+	  });
+
+  });
  $(document).ready(function(){
 	  $('li.MisProyectos').click(function(){
 		 window.location.href = '/projects/' +$(this).attr('value');

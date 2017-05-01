@@ -2,7 +2,7 @@
 
 @section('content')
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<link rel="stylesheet" href="css/font-awesome.css">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 <style>
 	@import url('https://fonts.googleapis.com/css?family=Anton');
     @import url('https://fonts.googleapis.com/css?family=Oswald');
@@ -28,7 +28,7 @@
                  <li class ="MisConvocatorias" value="{{Auth::user()->id}}"><a >Mis convocatorias</a></li>
             </ul>
         </li>
-		<li><a class="letternav" href="{{url ('/corporation/projects')}}">Proyecto</a></li>
+		<li class="MisProyectos" value="{{Auth::user()->id}}"><a class="letternav">Proyecto</a></li>
 		<li><a class="letternav" href="#">Mi equipo</a></li>
 	</ul>
 </div>
@@ -46,7 +46,6 @@
               <th class="head"><h5>Nombre</h5></th>
               <th class="head"><h5>Categoria</h5></th>
               <th class="head"> Ver mas </th> 
-              <th class="head"> Editar </th> 
             </tr>
           </thread>
           <tbody>
@@ -55,8 +54,7 @@
               <th scope="row">{{$announcements->id}}</th>
               <th >{{$announcements->name}}</th>
               <th >{{$announcements->category}}</th>
-              <th class="text-right"><i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$announcements->id}}"></i></th>
-              <th><i class="fa fa-pencil-square fa-2x iconpencil" aria-hidden="true" value="{{$announcements->id}}"></i></th>
+              <th ><i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$announcements->id}}"></i></th>
             </tr>
             @endforeach
           </tbody>
@@ -71,6 +69,13 @@
 		 window.location.href = '/corporation/dashboard/misConvocatorias/' +$(this).attr('value');
 		 
 	  });
+
+  });
+ $(document).ready(function(){
+    $('li.MisProyectos').click(function(){
+     window.location.href = '/projects/' +$(this).attr('value');
+     
+    });
 
   });
 </script>
