@@ -19,19 +19,6 @@
     background-color: green;
   }
 </style>
-<div class="navar">
-	<ul class="nav nav-pills">
-		<li><a class="letternav" href="{{url('/home')}}">Inicio</a></li>
-		<li><a href="#" class="letternav dropdown-toggle" data-toggle="dropdown">Convocatoria<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-                <li><a href="{{url('/announcements')}}">General</a></li>
-                 <li class ="MisConvocatorias" value="{{Auth::user()->id}}"><a >Mis convocatorias</a></li>
-            </ul>
-        </li>
-		<li><a class="letternav" href="{{url ('/corporation/projects')}}">Proyecto</a></li>
-		<li><a class="letternav" href="#">Mi equipo</a></li>
-	</ul>
-</div>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">

@@ -126,7 +126,16 @@
                 </div>
             </div>
         </nav>
-
+        <div class="navar">
+        	<div class="container">
+        	    <ul class="nav nav-pills">
+            		<li><a class="letternav" href="{{url ('/home')}}">Inicio</a></li>
+            		<li><a href="{{url('/announcements')}}" class="letternav">Convocatorias</a></li>
+            		<li class="MisProyectos" value=""><a class="letternav">Proyecto</a></li>
+            		<li><a class="letternav" href="/corporation/team">Mi equipo</a></li>
+            	</ul>
+        	</div>
+        </div>
         @yield('content')
     </div>
 

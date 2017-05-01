@@ -84,14 +84,6 @@
         padding-top: 10px;
     }
 </style>
-<div class="navar">
-	<ul class="nav nav-pills">
-		<li><a class="letternav" href="{{url ('/home')}}">Inicio</a></li>
-		<li><a href="{{url('/announcements')}}" class="letternav">Convocatorias</a></li>
-		<li class="MisProyectos" value="{{Auth::user()->id}}"><a class="letternav">Proyecto</a></li>
-		<li><a class="letternav" href="/corporation/team">Mi equipo</a></li>
-	</ul>
-</div>
 <div>
 	<div class="col-md-12 banner">
 		<img class="imgbanner" src="../Imagenes/banner.png">
