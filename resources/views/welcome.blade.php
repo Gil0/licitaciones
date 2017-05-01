@@ -131,7 +131,47 @@
         width: 7%;
         padding-top: 5px;
     }
+    .navar{
+        background: #39A8EA;
+        height: 45px;
+        width: 100%;
+    }
+    .letternav{
+        color: #fff;
+        font-family: 'Oswald', sans-serif;
+    }
 </style>
+@if(!Auth::guest())
+@if(Auth::user()->role == 'Corporation')
+    <div class="navar">
+        <ul class="nav nav-pills">
+            <li><a class="letternav" href="{{url ('/home')}}">Inicio</a></li>
+            <li><a href="#" class="letternav dropdown-toggle" data-toggle="dropdown">Convocatoria<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{url('/announcements')}}">General</a></li>
+                    <li class ="MisConvocatorias" value="{{Auth::user()->id}}"><a >Mis convocatorias</a></li>
+                </ul>
+            </li>
+            <li class="MisProyectos" value="{{Auth::user()->id}}"><a class="letternav">Proyecto</a></li>
+            <li><a class="letternav" href="#">Mi equipo</a></li>
+        </ul>
+    </div>
+    @else
+    <div class="navar">
+        <ul class="nav nav-pills">
+            <li><a class="letternav" href="{{url ('/home')}}">Inicio</a></li>
+            <li><a href="#" class="letternav dropdown-toggle" data-toggle="dropdown">Convocatoria<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{url('/announcements')}}">General</a></li>
+                 <li class ="MisConvocatorias" value="{{Auth::user()->id}}"><a >Mis convocatorias</a></li>
+                </ul>
+            </li>
+            <li class="MisProyectos" value="{{Auth::user()->id}}"><a class="letternav">Proyecto</a></li>
+        </ul>
+    </div>
+    @endif
+    @else
+    @endif
 <div class="">
     <div class="col-sm-12 banner">
         <img class="imgbanner" src="Imagenes/banner.png">
