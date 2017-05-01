@@ -117,6 +117,16 @@ class announcement extends Controller
         return json_encode($announcements);
     }
     
+    public function newProposal($id)
+    {
+        $announcement = DB::table('announcements')->where('id',$id)->first();
+        return redirect()->action(
+            'ProposalController@new' , [
+                'announcement' => $announcement
+            ]
+        );
+    }
+    
     /*
     public function deleteAnnouncement(Request $request, $id){
         $user = DB::table('announcements')->where('id',$id)->select('user_id')->first();

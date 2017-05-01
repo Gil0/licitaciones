@@ -45,6 +45,7 @@ Route::post('/announcement/new', 'announcement@crearConvocatoria'); //AJAX
 Route::post('/announcement/{id}', 'announcement@verAnnouncement'); //AJAX
 Route::post('/announcement/{id}/edit', 'announcement@editAnnouncement');
 Route::post('/announcement/{id}/update','announcement@updateAnnouncement');
+Route::post('/announcement/{id}/newProposal' , 'announcement@newProposal');
 Route::post('/announcements/search/{case}' , 'announcement@search'); //AJAX
 
 
@@ -52,6 +53,9 @@ Route::post('/announcements/search/{case}' , 'announcement@search'); //AJAX
 Route::get('/proyects' , 'ProyectsController@index');
 Route::get('/projects/{id}','ProyectsController@getProjects');
 Route::get('/projects/{id}/ver', 'ProyectsController@verProjects');
+
+/*----- Proposals -----*/
+Route::get('/proposals/new' , 'ProposalController@new');
 
 //Route::get('/corporation/dashboard/misConvocatorias/{id}','announcement@announcement');
 //Route::post('/corporation/dashboard/misConvocatorias/{id}/delete','announcement@deleteAnnouncement');

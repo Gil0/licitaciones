@@ -117,6 +117,16 @@
                             '<p class="lead">'+response.name+'</p>'+
                         '</center>'+
                     '</div>'+
+                '</div>'+
+                '<div class="container>'+
+                    '<div class="well">'+
+                        '<center>'+
+                            '<form action="/announcement/'+response.id+'/newProposal" method="POST">'+
+                              '{{ csrf_field() }}'+
+                              '<button action="submit">Enviar Propuesta</button>'+
+                            '</form>'+
+                        '</center>'+
+                    '</div>'+
                 '</div>'
               );
           }
