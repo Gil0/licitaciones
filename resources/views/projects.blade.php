@@ -2,6 +2,7 @@
 
 @section('content')
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 <style>
 	@import url('https://fonts.googleapis.com/css?family=Anton');
     @import url('https://fonts.googleapis.com/css?family=Oswald');
@@ -21,8 +22,8 @@
 	    @if(Auth::user()->role == 'Corporation')
 			<li><a href="#" class="letternav dropdown-toggle" data-toggle="dropdown">Convocatoria<b class="caret"></b></a>
 	            <ul class="dropdown-menu">
-	                <li><a href="{{url('/announcements')}}">General</a></li>
-	                <li class="MisConvocatorias" value="{{Auth::user()->id}}"><a>Mis Convocatorias</a></li>
+	            	<li><a href="{{url('/announcements')}}">General</a></li>
+                 	<li class ="MisConvocatorias" value="{{Auth::user()->id}}"><a >Mis convocatorias</a></li>
 	            </ul>
 	        </li>
 			<li class="MisProyectos" value="{{Auth::user()->id}}"><a class="letternav">Proyecto</a></li>
@@ -30,8 +31,8 @@
 		@else
 			<li><a href="#" class="letternav dropdown-toggle" data-toggle="dropdown">Convocatoria<b class="caret"></b></a>
 	            <ul class="dropdown-menu">
-	                <li><a href="#">General</a></li>
-	                <li><a href="#">Mis Convocatorias</a></li>
+	                <li><a href="{{url('/announcements')}}">General</a></li>
+                 <li class ="MisConvocatorias" value="{{Auth::user()->id}}"><a >Mis convocatorias</a></li>
 	            </ul>
 	        </li>
 			<li class="MisProyectos" value="{{Auth::user()->id}}"><a class="letternav">Proyecto</a></li>
@@ -49,8 +50,8 @@
             <tr>
               <th class="head"><h5>Id</h5></th>
               <th class="head"><h5>Costo</h5></th>
-              <th class="head"><h5>Announcement</h5></th>
-              <th class="head"></th> 
+              <th class="head"><h5>Convocatoria</h5></th>
+              <th class="head"><h5>Ver Mas</h5></th> 
             </tr>
           </thread>
           <tbody>
@@ -58,8 +59,8 @@
             <tr class="rowsTabla">
               <th scope="row">{{$projects->id}}</th>
               <th >{{$projects->cost}}</th>
-              <th >{{$projects->announcement}}</th>
-              <th class="text-right"><i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$announcements->id}}"></i></th>
+              <th >{{$projects->name}}</th>
+              <th ><i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$projects->id}}"></i></th>
             </tr>
             @endforeach
           </tbody>
@@ -81,7 +82,12 @@ $(document).ready(function(){
 		 window.location.href = '/projects/' +$(this).attr('value');
 		 
 	  });
-
+		$('li.MisConvocatorias').click(function(){
+		 window.location.href = '/corporation/dashboard/misConvocatorias/' +$(this).attr('value');
+	  });
+		 $('i.fa-plus-circle').click(function(){
+           window.location.href = '/projects/'+$(this).attr('value')+ '/ver';
+        });
   });
 </script>
 @endsection

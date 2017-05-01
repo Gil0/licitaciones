@@ -16,7 +16,7 @@
 		font-family: 'Oswald', sans-serif; 
 	}
    .fa-plus-circle{
-    background-color: green;
+    barckground-color: green;
   }
 </style>
 <div class="navar">
@@ -36,31 +36,30 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading" style="text-align: center;">Editar Convocatoria</div>
+                <div class="panel-heading" style="text-align: center;">Datos de la Convocatoria</div>
                 <div class="panel-body">
                     <form action="/corporation/dashboard/update/{{$announcement->id}}" method="POST">
                         {{ csrf_field() }} <!-- ESTE TOKEN ES IMPORTANTE PARA PODER ENVIAR DATOS AL SERVER... si no lo incluyes habra error ya que la informacion no es "confiable" -->
                         <div class="modal-body">
-                            <input type="text" class="form-control" value="{{$announcement->name}}" name="name" required ><br>
+                          Nombre de la convocatoria  <input type="text" class="form-control" readonly value="{{$announcement->name}}" name="name" required ><br>
                         </div>
                         <div class="modal-body">
-                            <input type="text" class="form-control" value="{{$announcement->category}}" name="category" required><br>
+                           Área<input type="text" class="form-control" readonly value="{{$announcement->category}}" name="category" required><br>
                         </div>
                         <div class="modal-body">
-                            <input type="text" class="form-control" value="{{$announcement->duration}}" name="duration" required><br>
+                          Duración  <input type="text" class="form-control" readonly value="{{$announcement->duration}}" name="duration" required><br>
                         </div>
                         <div class="modal-body">
-                            <input type="text" class="form-control" value="{{$announcement->budget}}" name="budget" required><br>
+                            Presupuesto<input type="text" class="form-control" readonly value="{{$announcement->budget}}" name="budget" required><br>
                         </div>
                         <div class="modal-body">
-                            <input type="text" class="form-control" value="{{$announcement->description}}" name="description" required><br>
+                          Descripción  <input type="text" class="form-control" readonly value="{{$announcement->description}}" name="description" required><br>
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelar">Cancelar</button>
-                            <button type="submit" class="btn btn-primary" id="crearConvocatoria">Guardar</button>
+                            <button type="submit" class="btn btn-primary" id="crearConvocatoria">Regresar</button>
                         </div>
                     </form>
                 </div>
@@ -76,7 +75,12 @@
 		 window.location.href = '/corporation/dashboard/misConvocatorias/' +$(this).attr('value');
 		 
 	  });
-    
+
   });
 </script>
 @endsection
+
+
+
+
+

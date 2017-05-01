@@ -94,7 +94,7 @@
             </ul>
         </li>
 		<li class="MisProyectos" value="{{Auth::user()->id}}"><a class="letternav">Proyecto</a></li>
-		<li><a class="letternav" href="#">Mi equipo</a></li>
+		<li><a class="letternav" href="/corporation/team">Mi equipo</a></li>
 	</ul>
 </div>
 <div>
@@ -131,7 +131,7 @@
 <script>
   $(document).ready(function(){
 	  $('li.MisConvocatorias').click(function(){
-		 window.location.href = '/corporation/dashboard/misConvocatorias/' +$(this).attr('value');
+		 window.location.href = '/corporation/dashboard/misConvocatorias/'+$(this).attr('value');
 		 
 	  });
 

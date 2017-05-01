@@ -26,7 +26,11 @@ class announcement extends Controller
     }
     /*------Projects-----*/
     public function getProjects(Request $request,$id){
-        $projects =  DB::table('projects')->where('id',$id)->get();
+        $projects =  DB::table('projects')
+        ->join('announcements', 'projects.announcement_id','=','announcements.id')
+        ->select('projects.*','announcements.name', 'announcements.budget', 'announcements.description')
+        ->where('projects.user_id',$id)
+        ->get();    
          return view('projects',['projects'=>$projects]);
     }
 
@@ -45,6 +49,12 @@ class announcement extends Controller
         ]);
         $announcements =  DB::table('announcements')->where('id',$id)->get();
          return view('/Corporation/convocatoria',['announcements'=>$announcements]);
+    }
+
+    public function deleteAnnouncement(Request $request, $id){
+        $user = DB::table('announcements')->where('id',$id)->select('user_id')->first();
+        DB::table('announcements')->where('id',$id)->delete();
+        return redirect()->action('announcement@announcement',['id'=>$user->user_id]);
     }
     /**
      * Show the form for creating a new resource.
@@ -121,7 +131,7 @@ class announcement extends Controller
     }
 
  public function announcement(Request $request , $id ){
-         $announcements =  DB::table('announcements')->where('id',$id)->get();
+         $announcements =  DB::table('announcements')->where('user_id',$id)->get();
          return view('/Corporation/convocatoria',['announcements'=>$announcements]);
      }
 
@@ -135,12 +145,33 @@ class announcement extends Controller
             'user_id' => $request->user_id,
            
         ]);
-     
-       return redirect()->action('announcement@getAnnouncements');
+        return redirect()->action('announcement@announcement',['id'=>$request->user_id]);
      }
      
+        public function verAnnouncement(Request $request, $id){
+            $announcement = DB::table('announcements')->where('id', $id)->first();
+        return view('Corporation/Vermas', ['announcement' => $announcement]);
+    }
  
- 
-     
+     public function addProject(Request $request, $id){
+          DB::table('projects')->insert([
+            'cost' => $request->cost,
+            'duration' => $request->duration,
+             'description' => $request->description,
+            'user_id' => $request->user_id,
+            'announcement_id' => $id,
+        ]);
+        return redirect()->action('announcement@getAnnouncements');
+     }
+
+      public function verProjects(Request $request,$id){
+        $projects =  DB::table('projects')
+        ->join('announcements', 'projects.announcement_id','=','announcements.id')
+        ->select('projects.*','announcements.*')
+        ->where('projects.id',$id)
+        ->first();
+        
+         return view('verProject',['projects'=>$projects]);
+    }
 
 }

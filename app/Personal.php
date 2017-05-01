@@ -33,4 +33,9 @@ class Personal extends Model
     {
     	return $this->belongsTo('App\User');
     }
+    
+    public function Corporation()
+    {
+        return $this->belongsToMany('App\Corporation','teams');
+    }
 }
