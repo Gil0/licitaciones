@@ -1,9 +1,130 @@
 @extends('layouts.app')
 
 @section('content')
-
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="application/javascript">
+        function searchAnnouncementsBy($case,$data)
+        {
+            $.ajax({
+                    url: '/announcements/search/'+$case,
+                   type: 'post',
+               dataType: 'json',
+                   data: {
+                       'data' : $data
+                   },
+                headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response)
+                {
+                    $('tbody#results').children().remove();
+                     for(var i=0; i< response.length; i++)
+                       {
+                            $('tbody#results').append(
+                            '<tr>'+
+                                '<td>'+
+                                    response[i].fechaCreacion.substring(0, 10)+
+                                '</td>'+
+                                '<td>'+
+                                    response[i].nombre+
+                                '</td>'+
+                                '<td>'+
+                                    response[i].categoria+
+                                '</td>'+
+                                '<td>'+
+                                    response[i].presupuesto+
+                                '</td>'+
+                                '<td>'+
+                                    response[i].empresaSolicitante+
+                                '</td>'+
+                                '<td>'+
+                                    '<center><a id="ver">Ver<option hidden>'+response[i].id+'</option></a></center>'+
+                                '</td>'+
+                            '</tr>'
+                            );
+                        }
+                }
+            });
+        }
+        
+        $(document).ready(function(){
+            $('div#search').click(function(){
+               //alert($(this).children('option').val());
+               switch($(this).children('option').val())
+               {
+                   case 'last':
+                       searchAnnouncementsBy('last',null);
+                       $('section#mainSection').prop('hidden',true);
+                       $('section#announcementInfo').prop('hidden',true);
+                       $('section#results').prop('hidden',false);
+                       $('div#searchValue').prop('hidden',true);
+                   break;
+                   
+                   case 'area':
+                       $('section#mainSection').prop('hidden',true);
+                       $('section#announcementInfo').prop('hidden',true);
+                       $('section#results').prop('hidden',false);
+                       $('div#searchValue').prop('hidden',false);
+                       $('div#searchValue').find('input').focus();
+                   break;
+                   
+                   case 'general':
+                   break;
+                    
+               }
+            });
+             $('input[name="search"]').keyup(function(){
+                 $('datalist#announcements').children().remove();
+                 searchAnnouncementsBy('area',$(this).val());
+                    $.ajax({
+                            url: '/corporations/areas',
+                           type: 'post',
+                       dataType: 'json',
+                        headers: {
+                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response)
+                        {
+                            for(var i=0; i<response.length; i++)
+                            {
+                                $('datalist#announcements').append(
+                                    '<option>'+response[i].workArea+'</option>'
+                                );
+                            }
+                        }
+                    }); 
+             });
+        });
+        
+       $(document).delegate("a#ver","click",function(){
+       $('section#mainSection').prop('hidden',true);
+       $('section#results').prop('hidden',true);
+       $('section#announcementInfo').prop('hidden',false).children().remove();
+       
+       $.ajax({
+          url: '/announcement/'+$(this).find('option').val(),
+          type: 'post',
+          dataType: 'json',
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          success: function(response){
+              $("section#announcementInfo").append(
+                '<div class="row">'+
+                    '<div class="col-md-12">'+
+                        '<center>'+
+                            '<img style="height:100px;width:auto;" class="responsive" src="{!!asset('Imagenes/announcement.png')!!}">'+
+                            '<p class="lead">'+response.name+'</p>'+
+                        '</center>'+
+                    '</div>'+
+                '</div>'
+              );
+          }
+       });
+    });
+</script>
 
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 <style>
 	@import url('https://fonts.googleapis.com/css?family=Anton');
     @import url('https://fonts.googleapis.com/css?family=Oswald');
@@ -16,118 +137,138 @@
 		color: #fff;
 		font-family: 'Oswald', sans-serif;
 	}
-	.banner{
-        background: #124151;
-        height: 320px;
-        position: relative;
-        top: 0px;
+	
+    div#searchOptions > .row:hover {
+        background-color: #CDCDCD;
     }
-    .imgbanner{
-        height: 320px;
-        width: 100%;
+    i.fa-plus-circle{
+      color: green;
     }
-    .letterbanner{
-        color: #fff;
-        font-family: 'Anton', sans-serif;
-        text-align: center;
-        position: relative;
-        top: -310px;
-        letter-spacing: 4px;
-        font-size: 40px;
+    i.fa-plus-circle:hover{
+        color:blue;
     }
-    .iconbanner{
-        position: relative;
-        top: -300px;
+    i.fa-pencil-square{
+      color: orange;
     }
-    .parrafoacerca{
-        text-align: justify;
-        padding-top: 20px;
+    i.fa-pencil-square:hover{
+        color:green;
     }
-    .parrafoacercade{
-        color: #4F4F4F;
-        font-family: 'Oswald', sans-serif;
-        font-size: 18px;
+    i.fa-trash{
+      color: #d9534f;
     }
-    .log{
-        color: #3F3F3F;
-        font-family: 'Anton', sans-serif;
-        font-size: 18px;
+    i.fa-trash:hover{
+        color:red;
     }
-    .equipo{
-        padding-top: 30px;
-        width:250px;
-        height: 250px;
-    }
-    .parrafoequipo{
-        color: #fff;
-        position: relative;
-        font-family: 'Oswald',sans-serif;
-        text-align: center;
-        top: -150px;
-        font-size: 25px;
-        text-decoration: underline;
-    }
-    .footer1{
-        height: 130px;
-        background: #0a2934;
-    }
-    .imgfooter{
-        width: 7%;
-        padding-top: 5px;
-    }
-    footer{
-        background: #124151;
-        height: 40px;
-        color: #fff;
-        font-family: 'Oswald', sans-serif;
-        text-align: center;
-        padding-top: 10px;
-    }
+    .head{
+      background-color: #5cb85c;
+      color: white; 
+    } 
 </style>
-<div>
-	<div class="col-md-12 banner">
-		<img class="imgbanner" src="../Imagenes/banner.png">
-        <center><h1 class="letterbanner">{{ Auth::user()->name }} bienvenido a</h1></center>
-        <h1 class="letterbanner">LiciTop</h1>
-        <center><img class="iconbanner" src="../Imagenes/list.png"></center>
-	</div>
-	<div class="col-md-10 col-md-offset-1 parrafoacerca">
-        <p class="parrafoacercade">Como <span class="log">Corporacion</span> podras publicar convocatorias de proyectos 
-        asi como solicitar participacion en otras disponibles dentro de la plataforma. Asi mismo como mandar ideas de proyecto dentro de diversas convocatorias y tener un equipo de trabajado agregando directamente a tu personal dentro de la plataforma.</p>
-        <div class="col-md-4">
-            <img class="equipo" src="../Imagenes/img1.png">
-            <p class="parrafoequipo">Registra convocatorias</p>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <br>
+            
+            <div class="col-md-12" style="padding-top:10px;">
+                
+                <div class="container-fluid" style="padding-top:10px;" id="searchOptions">
+                    
+                    <div class="row" style="padding-top:10px;" id="search">
+                        <option value="last" hidden></option>
+                        <div class="col-sm-2">
+                            <img style="height:50px;width:auto;border-radius:50%;" class="responsive" src="{!!asset('Imagenes/announcement.png')!!}">
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="row">
+                                    <p class="lead" style="font-size:90%; transform:translate(18%,80%);"> Nuevas Convocatorias </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row" style="padding-top:10px;" id="search">
+                        <option value="area" hidden></option>
+                        <div class="col-sm-2">
+                            <img style="height:50px;width:auto;border-radius:50%;" class="responsive" src="{!!asset('Imagenes/announcement.png')!!}">
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="row">
+                                    <p class="lead" style="font-size:90%; transform:translate(18%,80%);"> Por área </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row" style="padding-top:10px;" id="search">
+                        <option value="general" hidden></option>
+                        <div class="col-sm-2">
+                            <img style="height:50px;width:auto;border-radius:50%;" class="responsive" src="{!!asset('Imagenes/announcement.png')!!}">
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="row">
+                                    <p class="lead" style="font-size:90%; transform:translate(18%,80%);"> Busqueda General </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row" id="searchValue" style="transform:translate(0px,15px);" hidden>
+                        <center>
+                            <input type="text" name="search" list="announcements" class="form-control" placeholder="Buscar">
+                            <datalist id="announcements">
+                            </datalist>
+                        </center>
+                    </div>
+                    
+                </div>
+                
+            </div>
         </div>
-        <div class="col-md-4">
-            <img class="equipo" src="../Imagenes/img2.png">
-            <p class="parrafoequipo">Registra tu idea</p>
-        </div>
-        <div class="col-md-4">
-            <img class="equipo" src="../Imagenes/img3.png">
-            <p class="parrafoequipo">Registra a tu equipo</p>
+        <div class="col-md-9">
+            <br>
+            
+            <div class="col-md-12">
+                
+                <section id="mainSection">
+                    <div class="well">
+                        Aquí es donde tu podrás encontrar cualquier proyecto existente en la plataforma y hacer una propuesta 
+                        para ser seleccionado como el licitante ganador.
+                        <br><br><br>
+                        Prueba haciendo click en "Nuevas Convocatorias"
+                    </div>
+                </section>
+                
+                <section id="results" hidden>
+                    
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Fecha</th>
+                            <th>Nombre</th>
+                            <th>Categoría</th>
+                            <th>Presupuesto</th>
+                            <th>Empresa Solicitante</th>
+                            <th>Ver más</th>
+                          </tr>
+                        </thead>
+                        <tbody id=results>
+                        </tbody>
+                      </table>
+                    </div>
+                    
+                </section>
+                
+                <section id="announcementInfo" hidden>
+                    
+                </section>
+                
+            </div>
         </div>
     </div>
-    <div class="col-md-12 footer1">
-        <center><img class="imgfooter" src="../Imagenes/Logo1.png"></center>
-    </div>
-    <footer class="footer col-md-12">
-        <p>LiciTop - Todos los derechos reservados.</p>
-    </footer>
 </div>
-
-<script>
-  $(document).ready(function(){
-	  $('li.MisConvocatorias').click(function(){
-		 window.location.href = '/corporation/dashboard/misConvocatorias/'+$(this).attr('value');
-		 
-	  });
-
-  });
-  $(document).ready(function(){
-     $('li.MisProyectos').click(function(){
-        window.location.href = '/projects/' +$(this).attr('value');
-     });
-  });     
-</script>
-
 @endsection

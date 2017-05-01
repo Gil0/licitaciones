@@ -76,4 +76,10 @@ class CorporationController extends Controller
                                      ->where('users.id',$id)->first();
         return json_encode($Member);
     }
+    
+    public function areas()
+    {
+        $areas = DB::table('corporations')->select('workArea')->get();
+        return json_encode($areas);
+    }
 }

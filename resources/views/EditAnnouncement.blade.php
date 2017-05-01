@@ -25,7 +25,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading" style="text-align: center;">Editar Convocatoria</div>
                 <div class="panel-body">
-                    <form action="/corporation/dashboard/update/{{$announcement->id}}" method="POST">
+                    <form action="/announcement/{{$announcement->id}}/update" method="POST">
                         {{ csrf_field() }} <!-- ESTE TOKEN ES IMPORTANTE PARA PODER ENVIAR DATOS AL SERVER... si no lo incluyes habra error ya que la informacion no es "confiable" -->
                         <div class="modal-body">
                             <input type="text" class="form-control" value="{{$announcement->name}}" name="name" required ><br>
