@@ -75,7 +75,6 @@
 
                             <div class="col-md-6">
                                 <select name="role" class="form-control">
-                                  <option value="Personal">Personal</option>
                                   <option value="Corporation">Corporation</option>
                                 </select>
                             </div>

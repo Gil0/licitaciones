@@ -72,10 +72,7 @@ class HomeController extends Controller
             {
                 $Corporation = new Corporation;
                 $Corporation->location = $request->location;
-                $Corporation->phoneNumber = $request->phoneNumber;
                 $Corporation->address = $request->address;
-                $Corporation->zipCode = $request->zipCode;
-                $Corporation->rfc = $request->rfc;
                 $Corporation->workArea = $request->workArea;
                 $User->Corporation()->save($Corporation);
             }
