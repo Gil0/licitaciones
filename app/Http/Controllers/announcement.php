@@ -13,17 +13,42 @@ class announcement extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * 
      */
+    public function __construct()
+    {
+        //El constructor es el encargado de inicializar la instancia del controlador.
+        //Se carga el middleware auth en todo controlador que requiera tener una sesion activa 
+        //para poder ser utilizado una vez iniciada la sesion con email y password
+        $this->middleware('auth');
+    }
     public function index()
     {
-       
+       return view ('announcements');
     }
 
     public function getAnnouncements(){
         $announcements = DB::table('announcements')->get();
         //dd($annoucements);
-        return view ('announcements',['announcements' => $announcements]);
+        return json_encode($announcements);
     }
+    
+    public function crearConvocatoria(Request $request){
+         
+        //dd($request->all());
+        DB::table('announcements')->insert([
+                'name' => $request->nombre,
+            'category' => $request->categoria,
+            'duration' => $request->duracion,
+              'budget' => $request->presupuesto,
+         'description' => $request->descripcion,
+            'user_id' => Auth::user()->id,
+           
+        ]);
+        
+        return json_encode('ok');
+    }
+    
     /*------Projects-----*/
     public function getProjects(Request $request,$id){
         $projects =  DB::table('projects')
@@ -56,100 +81,18 @@ class announcement extends Controller
         DB::table('announcements')->where('id',$id)->delete();
         return redirect()->action('announcement@announcement',['id'=>$user->user_id]);
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    
+   
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-      public function __construct()
-    {
-        //El constructor es el encargado de inicializar la instancia del controlador.
-        //Se carga el middleware auth en todo controlador que requiera tener una sesion activa 
-        //para poder ser utilizado una vez iniciada la sesion con email y password
-        $this->middleware('auth');
-    }
-
- public function announcement(Request $request , $id ){
+    public function announcement(Request $request , $id ){
          $announcements =  DB::table('announcements')->where('user_id',$id)->get();
          return view('/Corporation/convocatoria',['announcements'=>$announcements]);
      }
 
-        public function crearConvocatoria(Request $request, $id){
-         DB::table('announcements')->insert([
-            'name' => $request->name,
-            'category' => $request->category,
-            'duration' => $request->duration,
-             'budget' => $request->budget,
-             'description' => $request->description,
-            'user_id' => $request->user_id,
-           
-        ]);
-        return redirect()->action('announcement@announcement',['id'=>$request->user_id]);
-     }
+    
      
-        public function verAnnouncement(Request $request, $id){
-            $announcement = DB::table('announcements')->where('id', $id)->first();
+    public function verAnnouncement(Request $request, $id){
+        $announcement = DB::table('announcements')->where('id', $id)->first();
         return view('Corporation/Vermas', ['announcement' => $announcement]);
     }
  

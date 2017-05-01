@@ -2,6 +2,108 @@
 
 @section('content')
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="application/javascript">
+
+    function getAnnouncements(){
+        $("section#announcementsList").children().remove();
+        $.ajax({
+                 url: '/announcements/getAnnouncements',
+                type: 'post',
+            dataType: 'json',
+             headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+             },
+             success: function(response){
+               alert(JSON.stringify(response));
+                 for(var i=0; i<response.length; i++){
+                     $("section#announcementsList").append(
+                        '<div class="container-fluid" style="padding-top:10px;" id="memberInfo">'+
+                            '<option hidden>'+response[i].id+'</option>'+
+                            '<div class="row">'+
+                                '<div class="col-sm-2">'+
+                                    '<img style="height:50px;width:auto;border-radius:50%;" class="responsive" src="{!!asset('Imagenes/announcement.png')!!}">'+
+                                '</div>'+
+                                '<div class="col-sm-10>'+
+                                    '<div class="row">'+
+                                        '<div class="row">'+
+                                            '<p class="lead" style="font-size:90%; transform:translate(3%,80%);">'+response[i].name+'</p>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'
+                     );
+                  }
+             }
+        });
+    }
+    
+    $(document).ready(function(){
+       getAnnouncements(); 
+       $("button#newAnnouncement").click(function(){
+           $("section#mainSection").prop('hidden',true);
+           $("section#newAnnouncement").prop('hidden',false);
+           $('section#memberInfo').prop('hidden',true)
+       }) ;
+       $("button#cancelar").click(function(){
+          $("input").val('');
+          $("textarea").val('');
+          $("section#newAnnouncement").prop('hidden',true);
+          $("section#mainSection").prop('hidden',false);
+       });
+       $("button#addAnnouncement").click(function(){
+            $.ajax({
+                url: '/announcement/new',
+               type: 'post',
+           dataType: 'json',
+               data: {
+                        'nombre' : $('input[name=nombre]').val(),
+                     'categoria' : $('input[name=categoria]').val(),
+                      'duracion' : $('input[name=duracion]').val(),
+                    'presupuesto': $("input[name=presupuesto]").val(),
+                    'descripcion': $("textarea[name=descripcion]").val()
+                    
+               },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (){
+                getAnnouncements();
+            }
+          });
+          $("input").val('');
+          $("textarea").val('');
+       });
+    });
+    
+    $(document).delegate("div#memberInfo","click",function(){
+       $('section#mainSection').prop('hidden',true);
+       $('section#newAnnouncement').prop('hidden',true);
+       $('section#memberInfo').prop('hidden',false).children().remove();
+       
+       $.ajax({
+          url: '/corporation/team/member/'+$(this).find('option').val(),
+          type: 'post',
+          dataType: 'json',
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          success: function(response){
+              $("section#memberInfo").append(
+                '<div class="row">'+
+                    '<div class="col-md-12">'+
+                        '<center>'+
+                            '<img style="height:100px;width:auto;" class="responsive" src="{!!asset('Imagenes/avatar-new.png')!!}">'+
+                            '<p class="lead">'+response.name+'</p>'+
+                        '</center>'+
+                    '</div>'+
+                '</div>'
+              );
+          }
+       });
+    });
+</script>
+
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 <style>
 	@import url('https://fonts.googleapis.com/css?family=Anton');
@@ -13,11 +115,8 @@
 	}
 	.letternav{
 		color: #fff;
-		font-family: 'Oswald', sans-serif; 
+		font-family: 'Oswald', sans-serif;
 	}
-   .fa-plus-circle{
-    barckground-color: green;
-  }
 </style>
 <div class="navar">
 	<ul class="nav nav-pills">
@@ -25,7 +124,7 @@
 		<li><a href="#" class="letternav dropdown-toggle" data-toggle="dropdown">Convocatoria<b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li><a href="{{url('/announcements')}}">General</a></li>
-                 <li class ="MisConvocatorias" value="{{Auth::user()->id}}"><a >Mis convocatorias</a></li>
+                <li class ="MisConvocatorias" value="{{Auth::user()->id}}"><a >Mis convocatorias</a></li>
             </ul>
         </li>
 		<li class="MisProyectos" value="{{Auth::user()->id}}"><a class="letternav">Proyecto</a></li>
@@ -34,85 +133,111 @@
 </div>
 
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-      <h2>Convocatorias</h2>
-      <div class="panel panel-default">
-        <table class="table table-striped">
-          <thread>
-            <tr>
-              <th class="head"><h5>Id</h5></th>
-              <th class="head"><h5>Nombre</h5></th>
-              <th class="head"><h5>Categoria</h5></th>
-              <th class="head"><h5>Ver mas</h5> </th> 
-              <th class="head"></th>
-            </tr>
-          </thread>
-          <tbody>
-          @foreach($announcements as $announcements)
-            <tr class="rowsTabla">
-              <th scope="row">{{$announcements->id}}</th>
-              <th >{{$announcements->name}}</th>
-              <th >{{$announcements->category}}</th>
-              <th ><i class="fa fa-plus-circle fa-2x" aria-hidden="true" value="{{$announcements->id}}"></i></th>
-              <th ><button type="button" id="Project" value="{{$announcements->id}}">Agregar Proyecto</th>
-            </tr>
-            @endforeach
-          </tbody>
-        </table>
-      </div>
+<style>
+    div#memberInfo:hover {
+        background-color: #CDCDCD;
+    }
+    i.fa-plus-circle{
+      color: green;
+    }
+    i.fa-plus-circle:hover{
+        color:blue;
+    }
+    i.fa-pencil-square{
+      color: orange;
+    }
+    i.fa-pencil-square:hover{
+        color:green;
+    }
+    i.fa-trash{
+      color: #d9534f;
+    }
+    i.fa-trash:hover{
+        color:red;
+    }
+    .head{
+      background-color: #5cb85c;
+      color: white; 
+    } 
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <br>
+            <div class="col-md-12">
+                <center><button style="width:85%;" class="form-control" id="newAnnouncement">Nueva Convocatoria</button></center>
+            </div>
+            <div class="col-md-12" style="padding-top:10px;">
+                <section id="announcementsList"></section>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <br>
+            <div class="col-md-12">
+                
+                <section id="mainSection">
+                    <div class="well">
+                        Puedes dar click en cualquier convocatoria para ver información a detalle.
+                    </div>
+                </section>
+              
+                <section id="newAnnouncement" hidden>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img style="height:100px;width:auto;" class="responsive" src="{!!asset('Imagenes/announcement.png')!!}">
+                        </div>
+                        <div class="col-md-10"> 
+                            <input placeholder="Nombre" type="text" style="width:100%;" class="form-control" name="nombre"/>
+                            <br>
+                            <input placeholder="Categoría" type="text" style="width:100%;" class="form-control" name="categoria"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img style="height:100px;width:auto;" class="responsive" src="{!! asset('Imagenes/time.png') !!}">
+                        </div>
+                        <div class="col-md-10">
+                            <input style="width:100%;transform:translate(0,90%);" class="form-control" type="text" name="duracion" placeholder="Duración de Proyecto"/>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img style="height:100px;width:auto;" class="responsive" src="{!! asset('Imagenes/budget.png') !!}">
+                        </div>
+                        <div class="col-md-10">
+                            <input style="width:100%;transform:translate(0,90%);" class="form-control" type="number" name="presupuesto" placeholder="Presupuesto en pesos mx"/>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img style="height:100px;width:auto;" class="responsive" src="{!! asset('Imagenes/description.png') !!}">
+                        </div>
+                        <div class="col-md-10">
+                            <textarea style="width:100%;" class="form-control" name="descripcion" placeholder="Describe tu proyecto"></textarea>
+                        </div>
+                    </div>
+                    
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn btn-success" style="width:90%;" id="addAnnouncement">Añadir</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-danger" style="width:90%;" id="cancelar">Cancelar</button>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="memberInfo" hidden>
+                    
+                </section>
+                
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-
-
-<!-- modal Crear Convocatoria-->
-<div class="modal fade" id="crearProyecto" tabindex="-1" role="dialog" aria-labelledby="Crear Proyecto">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Crear Proyecto</h4>
-      </div>
-      <form  method="POST" id="crearProyecto">
-      {{ csrf_field() }} <!-- ESTE TOKEN ES IMPORTANTE PARA PODER ENVIAR DATOS AL SERVER... si no lo incluyes habra error ya que la informacion no es "confiable" -->
-        <div class="modal-body">
-            <input type="text" class="form-control" placeholder="Costo" name="cost" required><br>
-        </div>
-        <div class="modal-body">
-            <input type="text" class="form-control" placeholder="Duracion" name="duration" required><br>
-        </div>
-        <div class="modal-body">
-            <input type="text" class="form-control" placeholder="Descripcion" name="description" required><br>
-        </div>
-        
-        <div class="modal-body">
-           <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelar">Cerrar</button>
-            <button type="submit" class="btn btn-primary" id="crearProyecto">Guardar</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<script>
- $(document).ready(function(){
-	  $('li.MisConvocatorias').click(function(){
-		 window.location.href = '/corporation/dashboard/misConvocatorias/' +$(this).attr('value');
-		 
-	  });
-    $('button#Project').click(function(){
-       $('#crearProyecto').modal('show');
-       $('form#crearProyecto').attr('action','/corporation/dashboard/crearProyecto/'+$(this).attr('value'));
-    });
-     $('li.MisProyectos').click(function(){
-		 window.location.href = '/projects/' +$(this).attr('value');
-	  });
-
-  });
-</script>
 @endsection

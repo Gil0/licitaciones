@@ -33,7 +33,9 @@ Route::get('/personal/dashboard/misConvocatorias/{id}','announcement@announcemen
 
 
 /*----- Anouncements -----*/
-Route::get('/announcements', 'announcement@getAnnouncements');
+Route::get('/announcements', 'announcement@index');
+Route::post('/announcements/getAnnouncements' , 'announcement@getAnnouncements'); //AJAX
+Route::post('/announcement/new', 'announcement@crearConvocatoria'); //AJAX
 
 
 /*---- Corporations -----*/
@@ -41,7 +43,7 @@ Route::get('/corporation/dashboard','CorporationController@index');
 Route::get('/corporation/dashboard/misConvocatorias/{id}','announcement@announcement');
 Route::get('/corporation/dashboard/misConvocatorias/{id}/edit', 'announcement@editAnnouncement');
 Route::get('/corporation/dashboard/misConvocatorias/{id}/ver', 'announcement@verAnnouncement');
-Route::post('/corporation/dashboard/crear/{id}',  ['middleware' , 'uses' => 'announcement@crearConvocatoria']);
+
 Route::post('/corporation/dashboard/misConvocatorias/{id}/delete','announcement@deleteAnnouncement');
 Route::post('/corporation/dashboard/update/{id}','announcement@updateAnnouncement');
 Route::post('/corporation/dashboard/crearProyecto/{id}','announcement@addProject');
