@@ -49,16 +49,12 @@ class announcement extends Controller
         return json_encode('ok');
     }
     
-    /*------Projects-----*/
-    public function getProjects(Request $request,$id){
-        $projects =  DB::table('projects')
-        ->join('announcements', 'projects.announcement_id','=','announcements.id')
-        ->select('projects.*','announcements.name', 'announcements.budget', 'announcements.description')
-        ->where('projects.user_id',$id)
-        ->get();    
-         return view('projects',['projects'=>$projects]);
+    public function verAnnouncement(Request $request, $id){
+        $announcement = DB::table('announcements')->where('id', $id)->first();
+        
+        return json_encode($announcement);
     }
-
+    
     public function editAnnouncement(Request $request, $id){
         $announcement = DB::table('announcements')->where('id', $id)->first();
         return view('EditAnnouncement', ['announcement' => $announcement]);
@@ -72,15 +68,32 @@ class announcement extends Controller
             'description' => $request->description,
             'user_id' => $request->user_id,
         ]);
-        $announcements =  DB::table('announcements')->where('id',$id)->get();
-         return view('/Corporation/convocatoria',['announcements'=>$announcements]);
+        
+        return redirect('/announcements');
     }
-
-    public function deleteAnnouncement(Request $request, $id){
+    
+     public function deleteAnnouncement(Request $request, $id){
         $user = DB::table('announcements')->where('id',$id)->select('user_id')->first();
         DB::table('announcements')->where('id',$id)->delete();
         return redirect()->action('announcement@announcement',['id'=>$user->user_id]);
     }
+    
+    
+    
+    /*------Projects-----*/
+    public function getProjects(Request $request,$id){
+        $projects =  DB::table('projects')
+        ->join('announcements', 'projects.announcement_id','=','announcements.id')
+        ->select('projects.*','announcements.name', 'announcements.budget', 'announcements.description')
+        ->where('projects.user_id',$id)
+        ->get();    
+         return view('projects',['projects'=>$projects]);
+    }
+
+    
+    
+
+   
     
    
 
@@ -91,10 +104,7 @@ class announcement extends Controller
 
     
      
-    public function verAnnouncement(Request $request, $id){
-        $announcement = DB::table('announcements')->where('id', $id)->first();
-        return view('Corporation/Vermas', ['announcement' => $announcement]);
-    }
+    
  
      public function addProject(Request $request, $id){
           DB::table('projects')->insert([

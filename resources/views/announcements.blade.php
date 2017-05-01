@@ -17,7 +17,7 @@
                alert(JSON.stringify(response));
                  for(var i=0; i<response.length; i++){
                      $("section#announcementsList").append(
-                        '<div class="container-fluid" style="padding-top:10px;" id="memberInfo">'+
+                        '<div class="container-fluid" style="padding-top:10px;" id="announcementInfo">'+
                             '<option hidden>'+response[i].id+'</option>'+
                             '<div class="row">'+
                                 '<div class="col-sm-2">'+
@@ -43,7 +43,7 @@
        $("button#newAnnouncement").click(function(){
            $("section#mainSection").prop('hidden',true);
            $("section#newAnnouncement").prop('hidden',false);
-           $('section#memberInfo').prop('hidden',true)
+           $('section#announcementInfo').prop('hidden',true)
        }) ;
        $("button#cancelar").click(function(){
           $("input").val('');
@@ -76,25 +76,35 @@
        });
     });
     
-    $(document).delegate("div#memberInfo","click",function(){
+    $(document).delegate("div#announcementInfo","click",function(){
        $('section#mainSection').prop('hidden',true);
        $('section#newAnnouncement').prop('hidden',true);
-       $('section#memberInfo').prop('hidden',false).children().remove();
+       $('section#announcementInfo').prop('hidden',false).children().remove();
        
        $.ajax({
-          url: '/corporation/team/member/'+$(this).find('option').val(),
+          url: '/announcement/'+$(this).find('option').val(),
           type: 'post',
           dataType: 'json',
           headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           },
           success: function(response){
-              $("section#memberInfo").append(
+              $("section#announcementInfo").append(
                 '<div class="row">'+
                     '<div class="col-md-12">'+
                         '<center>'+
-                            '<img style="height:100px;width:auto;" class="responsive" src="{!!asset('Imagenes/avatar-new.png')!!}">'+
+                            '<img style="height:100px;width:auto;" class="responsive" src="{!!asset('Imagenes/announcement.png')!!}">'+
                             '<p class="lead">'+response.name+'</p>'+
+                        '</center>'+
+                    '</div>'+
+                '</div>'+
+                '<div class="container>'+
+                    '<div class="well">'+
+                        '<center>'+
+                            '<form action="/announcement/'+response.id+'/edit" method="POST">'+
+                              '{{ csrf_field() }}'+
+                              '<button action="submit">Editar</button>'+
+                            '</form>'+
                         '</center>'+
                     '</div>'+
                 '</div>'
@@ -134,7 +144,7 @@
 
 
 <style>
-    div#memberInfo:hover {
+    div#announcementInfo:hover {
         background-color: #CDCDCD;
     }
     i.fa-plus-circle{
@@ -232,7 +242,7 @@
                     </div>
                 </section>
                 
-                <section id="memberInfo" hidden>
+                <section id="announcementInfo" hidden>
                     
                 </section>
                 
