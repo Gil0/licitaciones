@@ -22,8 +22,8 @@
 	    @if(Auth::user()->role == 'Corporation')
 			<li><a href="#" class="letternav dropdown-toggle" data-toggle="dropdown">Convocatoria<b class="caret"></b></a>
 	            <ul class="dropdown-menu">
-	                 <li><a href="{{url('/announcements')}}">General</a></li>
-                 <li class ="MisConvocatorias" value="{{Auth::user()->id}}"><a >Mis convocatorias</a></li>
+	            	<li><a href="{{url('/announcements')}}">General</a></li>
+                 	<li class ="MisConvocatorias" value="{{Auth::user()->id}}"><a >Mis convocatorias</a></li>
 	            </ul>
 	        </li>
 			<li class="MisProyectos" value="{{Auth::user()->id}}"><a class="letternav">Proyecto</a></li>
@@ -70,6 +70,13 @@
   </div>
 </div>
 <script>
+$(document).ready(function(){
+	  $('li.MisConvocatorias').click(function(){
+		 window.location.href = '/corporation/dashboard/misConvocatorias/' +$(this).attr('value');
+		 
+	  });
+
+  });
  $(document).ready(function(){
 	  $('li.MisProyectos').click(function(){
 		 window.location.href = '/projects/' +$(this).attr('value');

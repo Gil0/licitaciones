@@ -131,6 +131,15 @@
         width: 7%;
         padding-top: 5px;
     }
+    .navar{
+        background: #39A8EA;
+        height: 45px;
+        width: 100%;
+    }
+    .letternav{
+        color: #fff;
+        font-family: 'Oswald', sans-serif;
+    }
 </style>
 @if(!Auth::guest())
 @if(Auth::user()->role == 'Corporation')

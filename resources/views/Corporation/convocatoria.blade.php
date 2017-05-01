@@ -182,7 +182,12 @@
 		 window.location.href = '/projects/' +$(this).attr('value');
 	  });
     });
-    </script>
+    $(document).ready(function(){
+      $('li.MisProyectos').click(function(){
+        window.location.href = '/projects/' +$(this).attr('value');
+      });
+    });
+</script>
 
 
 @endsection
