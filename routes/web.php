@@ -65,3 +65,5 @@ Route::post('/proposals/search/{case}' , 'ProposalController@search'); //AJAX
 //Route::post('/corporation/dashboard/misConvocatorias/{id}/delete','announcement@deleteAnnouncement');
 //Route::post('/corporation/dashboard/crearProyecto/{id}','announcement@addProject');
 
+Route::get('/proposals/update/accept/{id}', 'ProposalController@updateAccept');
+Route::get('/proposals/update/reject/{id}', 'ProposalController@updateReject');

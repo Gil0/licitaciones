@@ -59,15 +59,17 @@ class ProposalController extends Controller
                                     'announcements.budget as presupuesto',
                                     'users.name as empresa',
                                     'announcements.id as id',
-                                    'proposals.status as status'
+                                    'proposals.status as status',
+                                    'proposals.id as idProposal'
                                 )
                             ->get();
                 
             break;
             case 'request-arrived':
-                DB::table('proposals')->where('receiver_id',Auth::user()->id)->update([
+                DB::table('proposals')->where([['receiver_id','=',Auth::user()->id],['status','=','Sent'],])->update([
                     'status' => 'Revision'
                 ]);
+               
 
                 $Proposals  = DB::table('proposals')
                             ->join('users','users.id','=','proposals.sender_id')
@@ -81,7 +83,8 @@ class ProposalController extends Controller
                                     'announcements.budget as presupuesto',
                                     'users.name as empresa',
                                     'announcements.id as id',
-                                    'proposals.status as status'
+                                    'proposals.status as status',
+                                    'proposals.id as idProposal'
                                 )
                             ->get();
             break;
@@ -96,5 +99,18 @@ class ProposalController extends Controller
         $Proposal = DB::table('proposals')->join('users','users.id','proposals.sender_id')->where('proposals.id',$id)->first();
 
         return json_encode($Proposal);
+    }
+
+    public function updateAccept($id){
+        DB::table('proposals')
+            ->where('id', $id)
+            ->update(['status' => 'Accepted']);
+        return redirect('/proyects');
+    }
+    public function updateReject($id){
+        DB::table('proposals')
+            ->where('id', $id)
+            ->update(['status' => 'Rejected']);
+            return redirect('/proyects');
     }
 }
