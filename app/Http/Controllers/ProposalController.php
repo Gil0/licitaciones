@@ -65,7 +65,10 @@ class ProposalController extends Controller
                 
             break;
             case 'request-arrived':
-            
+                DB::table('proposals')->where('receiver_id',Auth::user()->id)->update([
+                    'status' => 'Revision'
+                ]);
+
                 $Proposals  = DB::table('proposals')
                             ->join('users','users.id','=','proposals.sender_id')
                             ->join('announcements','announcements.id','=','proposals.announcement_id')
@@ -86,5 +89,12 @@ class ProposalController extends Controller
         //dd($Proposals->all());
 
         return json_encode($Proposals);
+    }
+
+    public function showProposal($id)
+    {
+        $Proposal = DB::table('proposals')->join('users','users.id','proposals.sender_id')->where('proposals.id',$id)->first();
+
+        return json_encode($Proposal);
     }
 }

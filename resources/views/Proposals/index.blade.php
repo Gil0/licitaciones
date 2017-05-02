@@ -59,41 +59,47 @@
                 case 'request-sent':
                   searchProposalsBy('request-sent',null);
                   $('section#mainSection').prop('hidden',true);
-                  $('section#announcementInfo').prop('hidden',true);
+                  $('section#proposalInfo').prop('hidden',true);
                   $('section#results').prop('hidden',false);
-                  $('div#searchValue').prop('hidden',true); 
+                  $('div#optionsProposal').prop('hidden',true); 
+                  $('button#acceptProposal').prop('disabled',true);
+                  $('button#rejectProposal').prop('disabled',true);
                 break;
 
                 case 'request-arrived':
                    searchProposalsBy('request-arrived',null);
                    $('section#mainSection').prop('hidden',true);
-                   $('section#announcementInfo').prop('hidden',true);
+                   $('section#proposalInfo').prop('hidden',true);
                    $('section#results').prop('hidden',false);
-                   $('div#searchValue').prop('hidden',true);
+                   $('div#optionsProposal').prop('hidden',true); 
+                   $('button#acceptProposal').prop('disabled',false);
+                   $('button#rejectProposal').prop('disabled',false);
                 break;                    
                }
           });
-       
-        
+
        $(document).delegate("a#ver","click",function(){
+       $('div#optionsProposal').prop('hidden',false); 
        $('section#mainSection').prop('hidden',true);
        $('section#results').prop('hidden',true);
-       $('section#announcementInfo').prop('hidden',false).children().remove();
+       $('section#proposalInfo').prop('hidden',false).children().remove();
        
        $.ajax({
-          url: '/announcement/'+$(this).find('option').val(),
+          url: '/proposals/'+$(this).find('option').val(),
           type: 'post',
           dataType: 'json',
           headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           },
           success: function(response){
-              $("section#announcementInfo").append(
+              $("section#proposalInfo").append(
                 '<div class="row">'+
                     '<div class="col-md-12">'+
                         '<center>'+
                             '<img style="height:100px;width:auto;" class="responsive" src="{!!asset('Imagenes/announcement.png')!!}">'+
                             '<p class="lead">'+response.name+'</p>'+
+                            '<p class="lead">'+response.email+'</p>'+
+                            '<div class="well">'+response.description+'</div>'+
                         '</center>'+
                     '</div>'+
                 '</div>'
@@ -117,7 +123,7 @@
 		font-family: 'Oswald', sans-serif;
 	}
 	
-    div#searchOptions > .row:hover {
+    div#searchOptions > .row:not(#optionsProposal):hover {
         background-color: #CDCDCD;
     }
     i.fa-plus-circle{
@@ -181,11 +187,11 @@
                         </div>
                     </div>
                     
-                    <div class="row" id="searchValue" style="transform:translate(0px,15px);" hidden>
+                    <div class="row" id="optionsProposal" style="transform:translate(0px,15px);" hidden>
                         <center>
-                            <input type="text" name="search" list="announcements" class="form-control" placeholder="Buscar">
-                            <datalist id="announcements">
-                            </datalist>
+                            <button class="btn btn-info form-control" id="acceptProposal">Aceptar</button>
+                            <br><br>
+                            <button class="btn btn-danger form-control" id="rejectProposal">Rechazar</button>
                         </center>
                     </div>
                     
@@ -229,7 +235,7 @@
                     
                 </section>
                 
-                <section id="announcementInfo" hidden>
+                <section id="proposalInfo" hidden>
                     
                 </section>
                 
