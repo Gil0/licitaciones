@@ -59,7 +59,7 @@
                 case 'request-sent':
                   searchProposalsBy('request-sent',null);
                   $('section#mainSection').prop('hidden',true);
-                  $('section#announcementInfo').prop('hidden',true);
+                  $('section#proposalInfo').prop('hidden',true);
                   $('section#results').prop('hidden',false);
                   $('div#searchValue').prop('hidden',true); 
                 break;
@@ -67,7 +67,7 @@
                 case 'request-arrived':
                    searchProposalsBy('request-arrived',null);
                    $('section#mainSection').prop('hidden',true);
-                   $('section#announcementInfo').prop('hidden',true);
+                   $('section#proposalInfo').prop('hidden',true);
                    $('section#results').prop('hidden',false);
                    $('div#searchValue').prop('hidden',true);
                 break;                    
@@ -78,22 +78,24 @@
        $(document).delegate("a#ver","click",function(){
        $('section#mainSection').prop('hidden',true);
        $('section#results').prop('hidden',true);
-       $('section#announcementInfo').prop('hidden',false).children().remove();
+       $('section#proposalInfo').prop('hidden',false).children().remove();
        
        $.ajax({
-          url: '/announcement/'+$(this).find('option').val(),
+          url: '/proposals/'+$(this).find('option').val(),
           type: 'post',
           dataType: 'json',
           headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           },
           success: function(response){
-              $("section#announcementInfo").append(
+              $("section#proposalInfo").append(
                 '<div class="row">'+
                     '<div class="col-md-12">'+
                         '<center>'+
                             '<img style="height:100px;width:auto;" class="responsive" src="{!!asset('Imagenes/announcement.png')!!}">'+
                             '<p class="lead">'+response.name+'</p>'+
+                            '<p class="lead">'+response.email+'</p>'+
+                            '<div class="well">'+response.description+'</div>'+
                         '</center>'+
                     '</div>'+
                 '</div>'
@@ -229,7 +231,7 @@
                     
                 </section>
                 
-                <section id="announcementInfo" hidden>
+                <section id="proposalInfo" hidden>
                     
                 </section>
                 
