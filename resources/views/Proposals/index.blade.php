@@ -61,7 +61,9 @@
                   $('section#mainSection').prop('hidden',true);
                   $('section#proposalInfo').prop('hidden',true);
                   $('section#results').prop('hidden',false);
-                  $('div#searchValue').prop('hidden',true); 
+                  $('div#optionsProposal').prop('hidden',true); 
+                  $('button#acceptProposal').prop('disabled',true);
+                  $('button#rejectProposal').prop('disabled',true);
                 break;
 
                 case 'request-arrived':
@@ -69,13 +71,15 @@
                    $('section#mainSection').prop('hidden',true);
                    $('section#proposalInfo').prop('hidden',true);
                    $('section#results').prop('hidden',false);
-                   $('div#searchValue').prop('hidden',true);
+                   $('div#optionsProposal').prop('hidden',true); 
+                   $('button#acceptProposal').prop('disabled',false);
+                   $('button#rejectProposal').prop('disabled',false);
                 break;                    
                }
           });
-       
-        
+
        $(document).delegate("a#ver","click",function(){
+       $('div#optionsProposal').prop('hidden',false); 
        $('section#mainSection').prop('hidden',true);
        $('section#results').prop('hidden',true);
        $('section#proposalInfo').prop('hidden',false).children().remove();
@@ -119,7 +123,7 @@
 		font-family: 'Oswald', sans-serif;
 	}
 	
-    div#searchOptions > .row:hover {
+    div#searchOptions > .row:not(#optionsProposal):hover {
         background-color: #CDCDCD;
     }
     i.fa-plus-circle{
@@ -183,11 +187,11 @@
                         </div>
                     </div>
                     
-                    <div class="row" id="searchValue" style="transform:translate(0px,15px);" hidden>
+                    <div class="row" id="optionsProposal" style="transform:translate(0px,15px);" hidden>
                         <center>
-                            <input type="text" name="search" list="announcements" class="form-control" placeholder="Buscar">
-                            <datalist id="announcements">
-                            </datalist>
+                            <button class="btn btn-info form-control" id="acceptProposal">Aceptar</button>
+                            <br><br>
+                            <button class="btn btn-danger form-control" id="rejectProposal">Rechazar</button>
                         </center>
                     </div>
                     
