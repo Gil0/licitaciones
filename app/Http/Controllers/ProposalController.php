@@ -21,7 +21,7 @@ class ProposalController extends Controller
         return view('Proposals/index');
     }
     
-    public function new(Request $request)
+    public function newT(Request $request)
     {
         return view('Proposals/proposals',[
             'announcement' => $request->announcement

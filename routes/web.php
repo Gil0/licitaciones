@@ -57,7 +57,7 @@ Route::get('/projects/{id}/ver', 'ProyectsController@verProjects');
 /*----- Proposals -----*/
 Route::get('/proposals' , 'ProposalController@index');
 Route::post('/proposals/{id}', 'ProposalController@showProposal'); //AJAX
-Route::get('/proposals/new' , 'ProposalController@new');
+Route::get('/proposals/new' , 'ProposalController@newT');
 Route::post('/proposal/new' , 'ProposalController@send');
 Route::post('/proposals/search/{case}' , 'ProposalController@search'); //AJAX
 
