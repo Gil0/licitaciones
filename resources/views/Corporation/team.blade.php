@@ -138,6 +138,11 @@
     .head{
       background-color: #5cb85c;
       color: white; 
+    }
+    .btncolora{
+      background: #39A8EA;
+      color: #fff;
+      font-family: 'Oswald', sans-serif;
     } 
 </style>
 
@@ -146,7 +151,7 @@
         <div class="col-md-4">
             <br>
             <div class="col-md-12">
-                <center><button style="width:85%;" class="form-control" id="newMember">Nuevo Integrante</button></center>
+                <center><button style="width:85%;" class="form-control btncolora" id="newMember">Nuevo Integrante</button></center>
             </div>
             <div class="col-md-12" style="padding-top:10px;">
                 <section id="membersList"></section>
@@ -157,7 +162,7 @@
             <div class="col-md-12">
                 
                 <section id="mainSection">
-                    <div class="well">
+                    <div style="border-color:#39A8EA;font-family:'Oswald', sans-serif" class="well">
                         Puedes dar click en cualquier miembro para ver información a detalle.
                     </div>
                 </section>

@@ -211,7 +211,7 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="row">
-                                    <p class="lead" style="font-size:90%; transform:translate(18%,80%);"> Nuevas Convocatorias </p>
+                                    <p class="lead" style="font-family:'Oswald', sans-serif; padding-top:15px; padding-left:50px; font-size:15px;"> Nuevas Convocatorias </p>
                                 </div>
                             </div>
                         </div>
@@ -225,7 +225,7 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="row">
-                                    <p class="lead" style="font-size:90%; transform:translate(18%,80%);"> Por área </p>
+                                    <p class="lead" style="font-family:'Oswald', sans-serif; padding-top:15px; padding-left:50px; font-size:15px;"> Por área </p>
                                 </div>
                             </div>
                         </div>
@@ -249,7 +249,7 @@
             <div class="col-md-12">
                 
                 <section id="mainSection">
-                    <div class="well">
+                    <div style="border-color:#39A8EA;font-family:'Oswald', sans-serif" class="well">
                         Aquí es donde tu podrás encontrar cualquier proyecto existente en la plataforma y hacer una propuesta 
                         para ser seleccionado como el licitante ganador.
                         <br><br><br>

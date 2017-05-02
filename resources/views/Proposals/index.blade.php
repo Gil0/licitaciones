@@ -181,7 +181,7 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="row">
-                                    <p class="lead" style="font-size:90%; transform:translate(18%,80%);"> Mis Solicitudes </p>
+                                    <p class="lead" style="font-family:'Oswald', sans-serif; padding-top:15px; padding-left:50px; font-size:15px;"> Mis Solicitudes </p>
                                 </div>
                             </div>
                         </div>
@@ -195,7 +195,7 @@
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="row">
-                                    <p class="lead" style="font-size:90%; transform:translate(18%,80%);"> Bandeja de Solicitudes </p>
+                                    <p class="lead" style="font-family:'Oswald', sans-serif; padding-top:15px; padding-left:50px; font-size:15px;"> Bandeja de Solicitudes </p>
                                 </div>
                             </div>
                         </div>
@@ -219,7 +219,7 @@
             <div class="col-md-12">
                 
                 <section id="mainSection">
-                    <div class="well">
+                    <div style="border-color:#39A8EA;font-family:'Oswald', sans-serif"class="well">
                         Aqui es donde veras el estado de las propuestas que has enviado a proyectos de otras companias 
                         y tambien podras ver el estado de las solicitudes que te envian otras empresas a ti.
                         <br><br><br>
