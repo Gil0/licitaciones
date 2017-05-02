@@ -112,15 +112,6 @@ class announcement extends Controller
                                     'announcements.id as id'
                                   )->get();
             break;
-            case 'request-sent':
-                $Proposals  = DB::table('proposals')
-                            ->join('users','users.id','=','proposals.sender_id')
-                            ->join('announcements','announcements.id','=','proposals.announcement_id')
-                            ->get();
-                
-                $announcements = $Proposals;
-                dd($announcements);
-            break;
         }
         return json_encode($announcements);
     }

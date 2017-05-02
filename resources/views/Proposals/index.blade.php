@@ -3,10 +3,10 @@
 @section('content')
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="application/javascript">
-        function searchAnnouncementsBy($case,$data)
+        function searchProposalsBy($case,$data)
         {
             $.ajax({
-                    url: '/announcements/search/'+$case,
+                    url: '/proposals/search/'+$case,
                    type: 'post',
                dataType: 'json',
                    data: {
@@ -24,7 +24,7 @@
                             $('tbody#results').append(
                             '<tr>'+
                                 '<td>'+
-                                    response[i].fechaCreacion.substring(0, 10)+
+                                    response[i].fecha.substring(0, 10)+
                                 '</td>'+
                                 '<td>'+
                                     response[i].nombre+
@@ -36,10 +36,13 @@
                                     response[i].presupuesto+
                                 '</td>'+
                                 '<td>'+
-                                    response[i].empresaSolicitante+
+                                    response[i].empresa+
+                                '</td>'+
+                                '<td id="status">'+
+                                    response[i].status+
                                 '</td>'+
                                 '<td>'+
-                                    '<center><a id="ver">Ver<option hidden>'+response[i].id+'</option></a></center>'+
+                                    '<a id="ver">Ver<option hidden>'+response[i].id+'</option></a>'+
                                 '</td>'+
                             '</tr>'
                             );
@@ -48,65 +51,29 @@
             });
         }
         
-        $(document).ready(function(){
-            $('div#search').click(function(){
-               //alert($(this).children('option').val());
-               switch($(this).children('option').val())
-               {
-                   case 'last':
-                       searchAnnouncementsBy('last',null);
-                       $('section#mainSection').prop('hidden',true);
-                       $('section#announcementInfo').prop('hidden',true);
-                       $('section#results').prop('hidden',false);
-                       $('div#searchValue').prop('hidden',true);
-                   break;
-                   
-                   case 'area':
-                       $('section#mainSection').prop('hidden',true);
-                       $('section#announcementInfo').prop('hidden',true);
-                       $('section#results').prop('hidden',false);
-                       $('div#searchValue').prop('hidden',false);
-                       $('div#searchValue').find('input').focus();
-                   break;
-                   
-                   case 'request-sent':
-                       searchAnnouncementsBy('request-sent',null);
-                       $('section#mainSection').prop('hidden',true);
-                       $('section#announcementInfo').prop('hidden',true);
-                       $('section#results').prop('hidden',false);
-                       $('div#searchValue').prop('hidden',true);
-                   break;
-                    
+        
+        $(document).delegate("div#search","click",function(){
+              //alert($(this).children('option').val());
+          switch($(this).children('option').val())
+            {
+                case 'request-sent':
+                  searchProposalsBy('request-sent',null);
+                  $('section#mainSection').prop('hidden',true);
+                  $('section#announcementInfo').prop('hidden',true);
+                  $('section#results').prop('hidden',false);
+                  $('div#searchValue').prop('hidden',true); 
+                break;
+
+                case 'request-arrived':
+                   searchProposalsBy('request-arrived',null);
+                   $('section#mainSection').prop('hidden',true);
+                   $('section#announcementInfo').prop('hidden',true);
+                   $('section#results').prop('hidden',false);
+                   $('div#searchValue').prop('hidden',true);
+                break;                    
                }
-            });
-             $('input[name="search"]').keyup(function(event){
-                 if(event.which <= 90 && event.which >= 48)
-                 {
-                      $('datalist#announcements').children().remove();
-                     searchAnnouncementsBy('area',$(this).val());
-                        $.ajax({
-                                url: '/corporations/areas',
-                               type: 'post',
-                           dataType: 'json',
-                            headers: {
-                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            success: function(response)
-                            {
-                                for(var i=0; i<response.length; i++)
-                                {
-                                    $('datalist#announcements').append(
-                                        '<option>'+response[i].workArea+'</option>'
-                                    );
-                                }
-                            }
-                        }); 
-                      }
-                      else{
-                        return false;
-                      }
-             });
-        });
+          });
+       
         
        $(document).delegate("a#ver","click",function(){
        $('section#mainSection').prop('hidden',true);
@@ -127,16 +94,6 @@
                         '<center>'+
                             '<img style="height:100px;width:auto;" class="responsive" src="{!!asset('Imagenes/announcement.png')!!}">'+
                             '<p class="lead">'+response.name+'</p>'+
-                        '</center>'+
-                    '</div>'+
-                '</div>'+
-                '<div class="container>'+
-                    '<div class="well">'+
-                        '<center>'+
-                            '<form action="/announcement/'+response.id+'/newProposal" method="POST">'+
-                              '{{ csrf_field() }}'+
-                              '<button action="submit">Enviar Propuesta</button>'+
-                            '</form>'+
                         '</center>'+
                     '</div>'+
                 '</div>'
@@ -195,35 +152,35 @@
             <div class="col-md-12" style="padding-top:10px;">
                 
                 <div class="container-fluid" style="padding-top:10px;" id="searchOptions">
-                    
-                    <div class="row" style="padding-top:10px;" id="search">
-                        <option value="last" hidden></option>
-                        <div class="col-sm-2">
-                            <img style="height:50px;width:auto;border-radius:50%;" class="responsive" src="{!!asset('Imagenes/announcement.png')!!}">
-                        </div>
-                        <div class="col-sm-10">
-                            <div class="row">
-                                <div class="row">
-                                    <p class="lead" style="font-size:90%; transform:translate(18%,80%);"> Nuevas Convocatorias </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="row" style="padding-top:10px;" id="search">
-                        <option value="area" hidden></option>
-                        <div class="col-sm-2">
-                            <img style="height:50px;width:auto;border-radius:50%;" class="responsive" src="{!!asset('Imagenes/announcement.png')!!}">
-                        </div>
-                        <div class="col-sm-10">
-                            <div class="row">
-                                <div class="row">
-                                    <p class="lead" style="font-size:90%; transform:translate(18%,80%);"> Por área </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                                         
+                    <div class="row" style="padding-top:10px;" id="search">
+                        <option value="request-sent" hidden></option>
+                        <div class="col-sm-2">
+                            <img style="height:50px;width:auto;border-radius:50%;" class="responsive" src="{!!asset('Imagenes/announcement.png')!!}">
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="row">
+                                    <p class="lead" style="font-size:90%; transform:translate(18%,80%);"> Mis Solicitudes </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="padding-top:10px;" id="search">
+                        <option value="request-arrived" hidden></option>
+                        <div class="col-sm-2">
+                            <img style="height:50px;width:auto;border-radius:50%;" class="responsive" src="{!!asset('Imagenes/announcement.png')!!}">
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="row">
+                                    <p class="lead" style="font-size:90%; transform:translate(18%,80%);"> Bandeja de Solicitudes </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="row" id="searchValue" style="transform:translate(0px,15px);" hidden>
                         <center>
                             <input type="text" name="search" list="announcements" class="form-control" placeholder="Buscar">
@@ -243,10 +200,10 @@
                 
                 <section id="mainSection">
                     <div class="well">
-                        Aquí es donde tu podrás encontrar cualquier proyecto existente en la plataforma y hacer una propuesta 
-                        para ser seleccionado como el licitante ganador.
+                        Aqui es donde veras el estado de las propuestas que has enviado a proyectos de otras companias 
+                        y tambien podras ver el estado de las solicitudes que te envian otras empresas a ti.
                         <br><br><br>
-                        Prueba haciendo click en "Nuevas Convocatorias"
+                        Prueba haciendo click en "Mis Solicitudes"
                     </div>
                 </section>
                 
@@ -260,7 +217,8 @@
                             <th>Nombre</th>
                             <th>Categoría</th>
                             <th>Presupuesto</th>
-                            <th>Empresa Solicitante</th>
+                            <th>Empresa</th>
+                            <th id="status">Status</th>
                             <th>Ver más</th>
                           </tr>
                         </thead>

@@ -130,6 +130,7 @@
         	    <ul class="nav nav-pills">
             		<li><a class="letternav" href="{{url ('/home')}}">Buscar</a></li>
             		<li><a href="{{url('/announcements')}}" class="letternav">Convocatorias</a></li>
+                    <li><a href="{{url('/proposals')}}" class="letternav">Propuestas</a></li>
             		<li><a class="letternav" href="/proyects">Proyectos</a></li>
             		<li><a class="letternav" href="/corporation/team">Mi equipo</a></li>
             	</ul>

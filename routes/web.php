@@ -55,8 +55,10 @@ Route::get('/projects/{id}','ProyectsController@getProjects');
 Route::get('/projects/{id}/ver', 'ProyectsController@verProjects');
 
 /*----- Proposals -----*/
+Route::get('/proposals' , 'ProposalController@index');
 Route::get('/proposals/new' , 'ProposalController@new');
 Route::post('/proposal/new' , 'ProposalController@send');
+Route::post('/proposals/search/{case}' , 'ProposalController@search'); //AJAX
 
 //Route::get('/corporation/dashboard/misConvocatorias/{id}','announcement@announcement');
 //Route::post('/corporation/dashboard/misConvocatorias/{id}/delete','announcement@deleteAnnouncement');

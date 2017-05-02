@@ -15,10 +15,15 @@ class ProposalController extends Controller
         //para poder ser utilizado una vez iniciada la sesion con email y password
         $this->middleware('auth');
     }
+
+    public function index()
+    {
+        return view('Proposals/index');
+    }
     
     public function new(Request $request)
     {
-        return view('proposals',[
+        return view('Proposals/proposals',[
             'announcement' => $request->announcement
         ]);
     }
@@ -35,5 +40,51 @@ class ProposalController extends Controller
         ]);
 
         return "ok";
+    }
+
+    public function search(Request $request, $case)
+    {
+        $Proposals = null;
+        switch ($case) {
+            case 'request-sent':
+               $Proposals  = DB::table('proposals')
+                            ->join('users','users.id','=','proposals.receiver_id')
+                            ->join('announcements','announcements.id','=','proposals.announcement_id')
+                            ->join('corporations','corporations.id','=','proposals.receiver_id')
+                            ->where('proposals.sender_id',Auth::user()->id)
+                            ->select(
+                                    'proposals.created_at as fecha',
+                                    'announcements.name as nombre',
+                                    'announcements.category as categoria',
+                                    'announcements.budget as presupuesto',
+                                    'users.name as empresa',
+                                    'announcements.id as id',
+                                    'proposals.status as status'
+                                )
+                            ->get();
+                
+            break;
+            case 'request-arrived':
+            
+                $Proposals  = DB::table('proposals')
+                            ->join('users','users.id','=','proposals.sender_id')
+                            ->join('announcements','announcements.id','=','proposals.announcement_id')
+                            ->join('corporations','corporations.id','=','proposals.receiver_id')
+                            ->where('proposals.receiver_id',Auth::user()->id)
+                            ->select(
+                                    'proposals.created_at as fecha',
+                                    'announcements.name as nombre',
+                                    'announcements.category as categoria',
+                                    'announcements.budget as presupuesto',
+                                    'users.name as empresa',
+                                    'announcements.id as id',
+                                    'proposals.status as status'
+                                )
+                            ->get();
+            break;
+        }
+        //dd($Proposals->all());
+
+        return json_encode($Proposals);
     }
 }
