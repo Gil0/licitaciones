@@ -18,6 +18,7 @@
        });
        $('button#cancel').click(function(){
           window.location.replace('/home');
+          
        });
        $('button#submit').click(function(){
           $.ajax({
