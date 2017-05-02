@@ -112,23 +112,7 @@
 		color: #fff;
 		font-family: 'Oswald', sans-serif;
 	}
-</style>
-<div class="navar">
-	<ul class="nav nav-pills">
-		<li><a class="letternav" href="{{url('/home')}}">Inicio</a></li>
-		<li><a href="#" class="letternav dropdown-toggle" data-toggle="dropdown">Convocatoria<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-                <li><a href="{{url('/announcements')}}">General</a></li>
-                <li class ="MisConvocatorias" value="{{Auth::user()->id}}"><a >Mis convocatorias</a></li>
-            </ul>
-        </li>
-		<li class="MisProyectos" value="{{Auth::user()->id}}"><a class="letternav">Proyecto</a></li>
-		<li><a class="letternav" href="#">Mi equipo</a></li>
-	</ul>
-</div>
-
-
-<style>
+	
     div#memberInfo:hover {
         background-color: #CDCDCD;
     }

@@ -70,12 +70,11 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" hidden>
                             <label for="password-confirm" class="col-md-4 control-label">Role</label>
 
                             <div class="col-md-6">
                                 <select name="role" class="form-control">
-                                  <option value="Personal">Personal</option>
                                   <option value="Corporation">Corporation</option>
                                 </select>
                             </div>

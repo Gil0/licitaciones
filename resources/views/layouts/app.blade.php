@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -126,7 +125,16 @@
                 </div>
             </div>
         </nav>
-
+        <div class="navar">
+        	<div class="container">
+        	    <ul class="nav nav-pills">
+            		<li><a class="letternav" href="{{url ('/home')}}">Buscar</a></li>
+            		<li><a href="{{url('/announcements')}}" class="letternav">Convocatorias</a></li>
+            		<li><a class="letternav" href="/proyects">Proyectos</a></li>
+            		<li><a class="letternav" href="/corporation/team">Mi equipo</a></li>
+            	</ul>
+        	</div>
+        </div>
         @yield('content')
     </div>
 

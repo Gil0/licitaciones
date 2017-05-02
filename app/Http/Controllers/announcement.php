@@ -28,8 +28,8 @@ class announcement extends Controller
     }
 
     public function getAnnouncements(){
-        $announcements = DB::table('announcements')->get();
-        //dd($annoucements);
+        $announcements = DB::table('announcements')
+                         ->where('user_id',Auth::user()->id)->get();
         return json_encode($announcements);
     }
     
@@ -43,7 +43,7 @@ class announcement extends Controller
               'budget' => $request->presupuesto,
          'description' => $request->descripcion,
             'user_id' => Auth::user()->id,
-           
+         'created_at' => date("Y-m-d H:i:s")
         ]);
         
         return json_encode('ok');
@@ -72,59 +72,79 @@ class announcement extends Controller
         return redirect('/announcements');
     }
     
-     public function deleteAnnouncement(Request $request, $id){
+    public function search(Request $request,$case)
+    {
+        $announcements = null;
+        
+        switch ($case) {
+            case 'last':
+                $announcements = DB::table('announcements')
+                                ->join('users','users.id','=','announcements.user_id')
+                                ->join('corporations','users.id','corporations.user_id')
+                                ->where('announcements.user_id','!=',Auth::user()->id)
+                                ->orderBy('announcements.created_at', 'desc')
+                                ->select(
+                                    'announcements.created_at as fechaCreacion',
+                                    'announcements.name as nombre',
+                                    'announcements.category as categoria',
+                                    'announcements.budget as presupuesto',
+                                    'users.name as empresaSolicitante',
+                                    'announcements.id as id'
+                                  )    
+                                ->get();
+            break;
+            case 'area':
+                $data = $request->data ? $request->data : '';
+                $announcements = DB::table('announcements')
+                                ->join('users','users.id','=','announcements.user_id')
+                                ->join('corporations','users.id','corporations.user_id')
+                                ->where([
+                                    ['announcements.user_id','!=',Auth::user()->id],
+                                    ['corporations.workArea','like','%'.$data.'%']
+                                ])
+                                ->orderBy('announcements.created_at', 'desc')
+                                ->select(
+                                    'announcements.created_at as fechaCreacion',
+                                    'announcements.name as nombre',
+                                    'announcements.category as categoria',
+                                    'announcements.budget as presupuesto',
+                                    'users.name as empresaSolicitante',
+                                    'announcements.id as id'
+                                  )->get();
+            break;
+            case 'request-sent':
+                $Proposals  = DB::table('proposals')
+                            ->join('users','users.id','=','proposals.sender_id')
+                            ->join('announcements','announcements.id','=','proposals.announcement_id')
+                            ->get();
+                
+                $announcements = $Proposals;
+                dd($announcements);
+            break;
+        }
+        return json_encode($announcements);
+    }
+    
+    public function newProposal($id)
+    {
+        $announcement = DB::table('announcements')->where('id',$id)->first();
+        return redirect()->action(
+            'ProposalController@new' , [
+                'announcement' => $announcement
+            ]
+        );
+    }
+    
+    /*
+    public function deleteAnnouncement(Request $request, $id){
         $user = DB::table('announcements')->where('id',$id)->select('user_id')->first();
         DB::table('announcements')->where('id',$id)->delete();
         return redirect()->action('announcement@announcement',['id'=>$user->user_id]);
     }
-    
-    
-    
-    /*------Projects-----*/
-    public function getProjects(Request $request,$id){
-        $projects =  DB::table('projects')
-        ->join('announcements', 'projects.announcement_id','=','announcements.id')
-        ->select('projects.*','announcements.name', 'announcements.budget', 'announcements.description')
-        ->where('projects.user_id',$id)
-        ->get();    
-         return view('projects',['projects'=>$projects]);
-    }
-
-    
-    
-
-   
-    
-   
 
     public function announcement(Request $request , $id ){
          $announcements =  DB::table('announcements')->where('user_id',$id)->get();
          return view('/Corporation/convocatoria',['announcements'=>$announcements]);
-     }
-
-    
-     
-    
- 
-     public function addProject(Request $request, $id){
-          DB::table('projects')->insert([
-            'cost' => $request->cost,
-            'duration' => $request->duration,
-             'description' => $request->description,
-            'user_id' => $request->user_id,
-            'announcement_id' => $id,
-        ]);
-        return redirect()->action('announcement@getAnnouncements');
-     }
-
-      public function verProjects(Request $request,$id){
-        $projects =  DB::table('projects')
-        ->join('announcements', 'projects.announcement_id','=','announcements.id')
-        ->select('projects.*','announcements.*')
-        ->where('projects.id',$id)
-        ->first();
-        
-         return view('verProject',['projects'=>$projects]);
     }
-
+    */
 }
