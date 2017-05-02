@@ -135,6 +135,7 @@
 	
     div#searchOptions > .row:not(#optionsProposal):hover {
         background-color: #CDCDCD;
+        cursor: pointer;
     }
     i.fa-plus-circle{
       color: green;
@@ -158,6 +159,9 @@
       background-color: #5cb85c;
       color: white; 
     } 
+    a#ver:hover{
+      cursor: pointer;
+    }
 </style>
 
 <div class="container-fluid">

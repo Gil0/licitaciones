@@ -115,6 +115,7 @@
 	
     div#memberInfo:hover {
         background-color: #CDCDCD;
+        cursor: pointer;
     }
     i.fa-plus-circle{
       color: green;

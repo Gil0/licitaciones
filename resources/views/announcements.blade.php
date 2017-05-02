@@ -35,8 +35,7 @@
                   }
              }
         });
-    }
-    
+    }  
     $(document).ready(function(){
        getAnnouncements(); 
        $("button#newAnnouncement").click(function(){
@@ -74,7 +73,6 @@
           $("textarea").val('');
        });
     });
-    
     $(document).delegate("div#announcementInfo","click",function(){
        $('section#mainSection').prop('hidden',true);
        $('section#newAnnouncement').prop('hidden',true);
@@ -129,6 +127,7 @@
 	
   div#announcementInfo:hover {
       background-color: #CDCDCD;
+      cursor: pointer;
   }
   i.fa-plus-circle{
     color: green;
