@@ -49,6 +49,9 @@
         }
         
         $(document).ready(function(){
+            $('div#search').hover(function(){
+              $(this).css('cursor','pointer');
+            });
             $('div#search').click(function(){
                //alert($(this).children('option').val());
                switch($(this).children('option').val())
@@ -107,7 +110,9 @@
                       }
              });
         });
-        
+       $(document).delegate('a#ver','hover',function(){
+          $(this).css('cursor','pointer');
+       });
        $(document).delegate("a#ver","click",function(){
        $('section#mainSection').prop('hidden',true);
        $('section#results').prop('hidden',true);
@@ -159,7 +164,9 @@
 		color: #fff;
 		font-family: 'Oswald', sans-serif;
 	}
-	
+	  a#ver:hover {
+      cursor: pointer;
+    }
     div#searchOptions > .row:hover {
         background-color: #CDCDCD;
     }
