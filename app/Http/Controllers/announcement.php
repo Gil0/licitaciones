@@ -120,7 +120,7 @@ class announcement extends Controller
     {
         $announcement = DB::table('announcements')->where('id',$id)->first();
         return redirect()->action(
-            'ProposalController@new' , [
+            'ProposalController@newT' , [
                 'announcement' => $announcement
             ]
         );

@@ -42,7 +42,7 @@
                                     response[i].status+
                                 '</td>'+
                                 '<td>'+
-                                    '<a id="ver">Ver<option hidden>'+response[i].id+'</option></a>'+
+                                    '<a id="ver" value="'+response[i].idProposal+'">Ver<option hidden>'+response[i].id+'</option></a>'+
                                 '</td>'+
                             '</tr>'
                             );
@@ -51,9 +51,7 @@
             });
         }
         
-        
         $(document).delegate("div#search","click",function(){
-              //alert($(this).children('option').val());
           switch($(this).children('option').val())
             {
                 case 'request-sent':
@@ -83,6 +81,7 @@
        $('section#mainSection').prop('hidden',true);
        $('section#results').prop('hidden',true);
        $('section#proposalInfo').prop('hidden',false).children().remove();
+
        
        $.ajax({
           url: '/proposals/'+$(this).find('option').val(),
@@ -106,7 +105,18 @@
               );
           }
        });
+       
     });
+
+     $(document).delegate("button#acceptProposal","click",function(){
+        		//alert( $('a#ver').attr('value')); 
+                window.location.href = '/proposals/update/accept/'+ $('a#ver').attr('value');
+     });
+      $(document).delegate("button#rejectProposal","click",function(){
+        		//alert( $('a#ver').attr('value')); 
+                window.location.href = '/proposals/update/reject/'+ $('a#ver').attr('value');
+     });
+
 </script>
 
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
@@ -193,9 +203,9 @@
                     
                     <div class="row" id="optionsProposal" style="transform:translate(0px,15px);" hidden>
                         <center>
-                            <button class="btn btn-info form-control" id="acceptProposal">Aceptar</button>
+                            <button class="btn btn-info form-control" id="acceptProposal" >Aceptar</button>
                             <br><br>
-                            <button class="btn btn-danger form-control" id="rejectProposal">Rechazar</button>
+                            <button class="btn btn-danger form-control" id="rejectProposal" value="">Rechazar</button>
                         </center>
                     </div>
                     
